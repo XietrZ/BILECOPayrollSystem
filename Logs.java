@@ -1,0 +1,44 @@
+	Table Name: deductions																					Database.java
+		DeductionID																					Database.java
+		PayrollDate																					Database.java
+		EmployeeID																					Database.java
+		SSSLoan																					Database.java
+		Pag-ibigLoan																					Database.java
+		SSSCont																					Database.java
+		Pag-ibigCont																					Database.java
+		Medicare																					Database.java
+		MP2																					Database.java
+		M-Aid																					Database.java
+		BEMCO																					Database.java
+		Un-Dues																					Database.java
+		LBP																					Database.java
+		EMLOAN																					Database.java
+		A/R																					Database.java
+		W-Tax																					Database.java
+		ASEMCO																					Database.java
+		BCCI																					Database.java
+		OCCCI																					Database.java
+		DBP																					Database.java
+		CFI																					Database.java
+		St.Peter																					Database.java
+		TotalDeductions																					Database.java
+		Comments																					Database.java
+	Table Name: earnings																					Database.java
+		EarningID																					Database.java
+		PayrollDate																					Database.java
+		EmployeeID																					Database.java
+		RegPay																					Database.java
+		SalAdj																					Database.java
+		Overtime																					Database.java
+		NS-DIFF																					Database.java
+		ECOLA																					Database.java
+		RATA																					Database.java
+		L-A																					Database.java
+		Longevity																					Database.java
+		Rice																					Database.java
+		L-W/OPay																					Database.java
+		TotalEarnings																					Database.java
+	Payroll Table Name: department																					Database.java
+		PayrollDate																					Database.java
+		PayrollDateStartPeriod																					Database.java
+		LockStatus																					Database.java
