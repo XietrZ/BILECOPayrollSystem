@@ -109,7 +109,7 @@ public class PDFCreator {
 	 * @param payslip
 	 * @param mode
 	 */
-	private void createPdf(String filename,ArrayList<PayslipDataStorageInfo> payslipDataStorageList,
+	public void createPdf(String filename,ArrayList<PayslipDataStorageInfo> payslipDataStorageList,
 			PayrollSlipLayout payslip,int mode){
 		System.out.println("\t"
 				+ "File path: "+ filename+CLASS_NAME);
@@ -891,7 +891,9 @@ public class PDFCreator {
         System.out.println("\tDone creating the PAYROLL pdf!"+CLASS_NAME);
         isSuccessCreatingPDF=true;
 		
-        MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of employee in each department pdf!", JOptionPane.INFORMATION_MESSAGE);
+//        MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of employee in each department pdf!", JOptionPane.INFORMATION_MESSAGE);
+        System.out.println("\tFUCK_8: UNcomment AFTER FIX the MainFrame.getInstance().showOptionPaneMessageDialog "+CLASS_NAME);
+        
 	}
 	
 	/**
@@ -3685,13 +3687,17 @@ public class PDFCreator {
 		//--> Transfer the correct columns in new array strings
 		if(correctDedsColumnList==null && correctEarnColumnList==null){
 			correctEarnColumnList=new String[db.earningTableColumnNames.length-1-numOfFirstColumnsNotIncluded];
-			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded];
+			//-> Add plus 1 for extra cell since deduction count is not even numbers
+			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded+1];
+
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.earningTableColumnNames.length-1;i++,j++){
 				correctEarnColumnList[j]=db.earningTableColumnNames[i];
 			}
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.deductionTableColumnNames.length-2;i++,j++){
 				correctDedsColumnList[j]=db.deductionTableColumnNames[i];
 			}
+			//-> Add plus 1 for extra cell since deduction count is not even numbers
+			correctDedsColumnList[correctDedsColumnList.length-1]="FUCK";
 		}
 		
 		//-----------------------------------------------
