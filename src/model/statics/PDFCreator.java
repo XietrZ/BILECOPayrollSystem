@@ -74,7 +74,7 @@ public class PDFCreator {
 	private static PDFCreator instance;
 	private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 14,
 	      Font.BOLD);
-	private static Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,
+	private static Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 9,
 	      Font.NORMAL);
 	private Rotate rotate;
 	private ArrayList<PayrollPDFTotalValueInfo>totalValueList,departmentTotalValueList;
@@ -893,6 +893,7 @@ public class PDFCreator {
 		
 //        MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of employee in each department pdf!", JOptionPane.INFORMATION_MESSAGE);
         System.out.println("\tFUCK_8: UNcomment AFTER FIX the MainFrame.getInstance().showOptionPaneMessageDialog "+CLASS_NAME);
+        System.out.println("\n\tFUCK_1.1: UNcomment AFTER FIX the MainFrame.getInstance().showOptionPaneMessageDialog "+CLASS_NAME);
         
 	}
 	
@@ -1648,7 +1649,7 @@ public class PDFCreator {
 					}
 				}
 				else{
-					cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align right if numbers
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align right even though "-"
 				}
 				if(isTOTALTempBoolean){
 //					cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -1674,6 +1675,10 @@ public class PDFCreator {
 			}
 			
 			
+			//--> Add extra cell
+			cell=initNewNormalCell("-", contentFont);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table.addCell(cell);
 			
 		}
 		
@@ -3697,7 +3702,7 @@ public class PDFCreator {
 				correctDedsColumnList[j]=db.deductionTableColumnNames[i];
 			}
 			//-> Add plus 1 for extra cell since deduction count is not even numbers
-			correctDedsColumnList[correctDedsColumnList.length-1]="FUCK";
+			correctDedsColumnList[correctDedsColumnList.length-1]="";
 		}
 		
 		//-----------------------------------------------

@@ -66,9 +66,10 @@ public class PDFCreatorTestCase {
 		dialog.payrollDateComboBox.setSelectedIndex(1); 
 		String strToCompare = "TSD";
 		dialog.departmentComboBox.setSelectedIndex(1); 
-		System.out.println("Fuck_1: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
-		System.out.println("Fuck_1: dialog.departmentComboBox: "+dialog.departmentComboBox.getSelectedItem().toString()+CLASS_NAME);
 		
+		System.out.println("\nFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
+		System.out.println("Fuck_1.0: dialog.departmentComboBox: "+dialog.departmentComboBox.getSelectedItem().toString()+CLASS_NAME);
+		System.out.println();
 		
 		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
 		PDFCreator.getInstance().createPdf(fileNamePath, null,
@@ -76,4 +77,6 @@ public class PDFCreatorTestCase {
 		
 		assertEquals(strToCompare,dialog.departmentComboBox.getSelectedItem().toString() );
 	}
+	
+	
 }
