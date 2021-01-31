@@ -653,6 +653,11 @@ public class Controller implements WindowListener{
 
 
 	
+	
+	public ListenerHomeViewPanel getHomeViewPanelListener() {
+		return homeViewPanelListener;
+	}
+
 	public static Controller getInstance(){
 		if(instance==null ){
 			instance=new Controller();

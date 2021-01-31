@@ -280,7 +280,7 @@ public class ExcelCreator {
 	 * @throws RowsExceededException 
 	 * @throws SQLException 
 	 */
-	private void createExcel(String filename,int mode,MainFrame mainFrame) throws IOException, RowsExceededException, WriteException, SQLException, DocumentException{
+	public void createExcel(String filename,int mode,MainFrame mainFrame) throws IOException, RowsExceededException, WriteException, SQLException, DocumentException{
 		
 		
 		//--> Name of excel file
@@ -311,40 +311,41 @@ public class ExcelCreator {
 			String title=null,neededColumnName=null;
 			Database db= Database.getInstance();
 			Utilities util= Utilities.getInstance();
+			int dbIndex = 16; // ASEMCO
 			switch(mode){
 				case Constant.PAYROLL_ASEMCO_EXCEL:{
 					title="ASEMCO";
-			 		neededColumnName=db.deductionTableColumnNames[15];
+			 		neededColumnName=db.deductionTableColumnNames[dbIndex];
 			 		break;
 			 	}
 			 	case Constant.PAYROLL_BCCI_EXCEL:{
 			 		title="BCCI";
-			 		neededColumnName=db.deductionTableColumnNames[16];
+			 		neededColumnName=db.deductionTableColumnNames[dbIndex+1];
 			 		break;
 			 	}
 			 	case Constant.PAYROLL_OCCCI_EXCEL:{
 			 		title="OCCCI";
-			 		neededColumnName=db.deductionTableColumnNames[17];
+			 		neededColumnName=db.deductionTableColumnNames[dbIndex+2];
 			 		break;
 			 	}
 			 	case Constant.PAYROLL_DBP_EXCEL:{
 			 		title="DBP";
-			 		neededColumnName=db.deductionTableColumnNames[18];
+			 		neededColumnName=db.deductionTableColumnNames[dbIndex+3];
 			 		break;
 			 	}
 			 	case Constant.PAYROLL_CFI_EXCEL:{
 			 		title="CFI";
-			 		neededColumnName=db.deductionTableColumnNames[19];
+			 		neededColumnName=db.deductionTableColumnNames[dbIndex+4];
 			 		break;
 			 	}
 			 	case Constant.PAYROLL_ST_PETER_PLAN_EXCEL:{
 			 		title="ST. PETER";
-			 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[20]);
+			 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[dbIndex+5]);
 			 		break;
 			 	}
 			 	case Constant.PAYROLL_W_TAX_EXCEL:{
 			 		title="WITHOLDING TAX";
-			 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[14]);
+			 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[dbIndex-1]);
 			 		break;
 			 	}
 
@@ -548,7 +549,8 @@ public class ExcelCreator {
 			workbook.close();
 			
 			
-			mainFrame.showOptionPaneMessageDialog("Excel file successfully created!", JOptionPane.INFORMATION_MESSAGE);
+//			mainFrame.showOptionPaneMessageDialog("Excel file successfully created!", JOptionPane.INFORMATION_MESSAGE);
+			System.out.println("\tUNcomment  mainframe");
 		}
 	}
 	 /**
@@ -693,7 +695,7 @@ public class ExcelCreator {
 		//---------------------------
 		//--> Add Signature content
 		wsheet=processPayrollContentSignature(wsheet, util, Constant.PAYROLL_PER_DEPARTMENT_EXCEL);
-	
+		
 		isSuccessCreatingEXCEL=true;
 	}
 	
@@ -2201,7 +2203,7 @@ public class ExcelCreator {
 			Database db,
 			ArrayList<SelectConditionInfo>conditionColumnAndValueList,
 			String[] joinColumnCompareList,String payrollDate,
-			String payrollDateBefore,Utilities util) throws RowsExceededException, WriteException{
+			String payrollDateBefore,Utilities util,int lbpDbIndex) throws RowsExceededException, WriteException{
 		
 //		private void selectBasedFromColumns(
 //				String[] tableNameList,
@@ -2221,7 +2223,7 @@ public class ExcelCreator {
 				//--> Add aditional condition including this payroll date before
 				conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[1],payrollDateBefore ));
 				//--> Add aditional condition to NOT retrieve data with all zero values in a row.
-				conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[11],0 ));
+				conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[lbpDbIndex],0 )); // LBP
 				conditionColumnAndValueList.get(conditionColumnAndValueList.size()-1).setSign("!=");
 				
 				
@@ -2229,7 +2231,7 @@ public class ExcelCreator {
 				//--> Retrieve all LBP data from database of the chosen payroll date and the payroll date before.
 				db.selectDataInDatabase(
 					new String[]{db.tableNameEmployee,db.tableNameDeductions},
-					new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[11],db.payrollDateTableColumnNames[0],db.tableNameEmployee+"."+db.employeeTableColumnNames[0]}, //FamilyName, FirstName, LBP, PayrollDate, DeductionID 
+					new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[lbpDbIndex],db.payrollDateTableColumnNames[0],db.tableNameEmployee+"."+db.employeeTableColumnNames[0]}, //FamilyName, FirstName, LBP, PayrollDate, DeductionID 
 					conditionColumnAndValueList,
 					joinColumnCompareList,
 					new OrderByInfo(new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3]}, "ASC"),
@@ -2415,7 +2417,7 @@ public class ExcelCreator {
 	private WritableSheet processLBPSecondPayTableContent_30thDay(WritableSheet sheet,
 			Database db,
 			ArrayList<SelectConditionInfo>conditionColumnAndValueList,
-			String[] joinColumnCompareList, Utilities util) throws RowsExceededException, WriteException{
+			String[] joinColumnCompareList, Utilities util, int lbpDbIndex) throws RowsExceededException, WriteException{
 
 //		private String selectInnerJoinWithCondition(
 //		String[] tableNameList,
@@ -2428,7 +2430,7 @@ public class ExcelCreator {
 		double totalAllLBP30thValue=0;
 		
 		//--> Add aditional condition to NOT retrieve data with all zero values in a row.
-		conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[11],0 ));
+		conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[lbpDbIndex],0 ));
 		conditionColumnAndValueList.get(conditionColumnAndValueList.size()-1).setSign("!=");
 		//--> Add condition if regular or contractual
 		conditionColumnAndValueList.add(new SelectConditionInfo(
@@ -2451,7 +2453,7 @@ public class ExcelCreator {
 		//--> Retrieve data from database
 		db.selectDataInDatabase(
 			new String[]{db.tableNameEmployee,db.tableNameDeductions},
-			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[11]}, //FamilyName, FirstName, LBP 
+			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[lbpDbIndex]}, //FamilyName, FirstName, LBP 
 			conditionColumnAndValueList,
 			joinColumnCompareList,
 			new OrderByInfo(new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3]},"ASC"), // Sort Ascending order LastName FirstName
@@ -2558,12 +2560,12 @@ public class ExcelCreator {
 		};
 		
 		//-----------------------------------------------------------------------------------------------
-		
+		int lbpDbIndex = 12;
 		//--> PROCESS IF THE PAYROLL DATE IS AT 15th or FIRST PAY
 		if(util.isFirstPayOfTheMonth(day)){	
 			sheet = processLBPFirstPayTableContent_15thDay(sheet, db,
 					conditionColumnAndValueList, joinColumnCompareList,
-					payrollDate, payrollDateBefore, util);
+					payrollDate, payrollDateBefore, util,lbpDbIndex);
 		}
 		//-----------------------------------------------------------------------------------------------
 		
@@ -2572,7 +2574,7 @@ public class ExcelCreator {
 			
 			sheet = processLBPSecondPayTableContent_30thDay(sheet,
 					db, conditionColumnAndValueList, joinColumnCompareList,
-					util
+					util,lbpDbIndex
 			);
 		}
 		return sheet;
@@ -2791,13 +2793,14 @@ public class ExcelCreator {
 //	    WHERE PayrollDate='2018-04-30';
 		
 		int colIndex=0,rowIndex=sheet.getRows();
+		int unionDuesDbIndex = 11;
 		
 		//-----------------------------------------------------------------------------------------------
 		//--> Set Condition parameters
 		ArrayList<SelectConditionInfo> conditionColumnAndValueList=new ArrayList<SelectConditionInfo>();
 		conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[1],payrollDate )); // PayrollDate
 		//--> Add aditional condition to NOT retrieve data with all zero values in a row.
-		conditionColumnAndValueList.add(new SelectConditionInfo(util.addSlantApostropheToString(db.deductionTableColumnNames[10]),0 )); //Un-Dues 
+		conditionColumnAndValueList.add(new SelectConditionInfo(util.addSlantApostropheToString(db.deductionTableColumnNames[unionDuesDbIndex]),0 )); //Un-Dues 
 		conditionColumnAndValueList.get(conditionColumnAndValueList.size()-1).setSign("!=");
 		//--> Add condition if regular or contractual
 		conditionColumnAndValueList.add(new SelectConditionInfo(
@@ -2836,7 +2839,7 @@ public class ExcelCreator {
 		//--> Retrieve data from database
 		db.selectDataInDatabase(
 			new String[]{db.tableNameEmployee,db.tableNameDeductions},
-			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],util.addSlantApostropheToString(db.deductionTableColumnNames[10])}, //FamilyName, FirstName, UnionDues
+			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],util.addSlantApostropheToString(db.deductionTableColumnNames[unionDuesDbIndex])}, //FamilyName, FirstName, UnionDues
 			conditionColumnAndValueList,
 			joinColumnCompareList,
 			new OrderByInfo(new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3]},"ASC"), // Sort Ascending order LastName FirstName
@@ -3542,14 +3545,21 @@ public class ExcelCreator {
 		
 		//--> Transfer the correct columns in new array strings
 		if(correctDedsColumnList==null && correctEarnColumnList==null){
+			
 			correctEarnColumnList=new String[db.earningTableColumnNames.length-1-numOfFirstColumnsNotIncluded];
-			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded];
+			//--> Added extra 1 for extra empty column header
+			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded+1]; 
+			
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.earningTableColumnNames.length-1;i++,j++){
 				correctEarnColumnList[j]=db.earningTableColumnNames[i];
 			}
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.deductionTableColumnNames.length-2;i++,j++){
 				correctDedsColumnList[j]=db.deductionTableColumnNames[i];
 			}
+			//--> Added extra 1 for extra empty column header
+			correctDedsColumnList[correctDedsColumnList.length-1]="";
+			
+			
 		}
 		
 		//-----------------------------------------------

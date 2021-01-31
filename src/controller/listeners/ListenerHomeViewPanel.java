@@ -184,7 +184,7 @@ private final String CLASS_NAME="\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+thi
 	/**
 	 * Process when select button is clicked
 	 */
-	private void processWhenPayrollModeSelected(){
+	public void processWhenPayrollModeSelected(){
 		System.out.println(THIS_CLASS_NAME+"Payroll Mode Selected!"+CLASS_NAME);
 		
 		Database db=Database.getInstance();

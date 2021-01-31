@@ -74,7 +74,7 @@ public class PDFCreator {
 	private static PDFCreator instance;
 	private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 14,
 	      Font.BOLD);
-	private static Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,
+	private static Font contentFont = new Font(Font.FontFamily.TIMES_ROMAN, 9,
 	      Font.NORMAL);
 	private Rotate rotate;
 	private ArrayList<PayrollPDFTotalValueInfo>totalValueList,departmentTotalValueList;
@@ -109,7 +109,7 @@ public class PDFCreator {
 	 * @param payslip
 	 * @param mode
 	 */
-	private void createPdf(String filename,ArrayList<PayslipDataStorageInfo> payslipDataStorageList,
+	public void createPdf(String filename,ArrayList<PayslipDataStorageInfo> payslipDataStorageList,
 			PayrollSlipLayout payslip,int mode){
 		System.out.println("\t"
 				+ "File path: "+ filename+CLASS_NAME);
@@ -189,40 +189,41 @@ public class PDFCreator {
 				String title=null,neededColumnName=null;
 				Database db= Database.getInstance();
 				Utilities util= Utilities.getInstance();
+				int initTableIndex=16; // ASEMCO
 				switch(mode){
 					case Constant.PAYROLL_ASEMCO_PDF:{
 						title="ASEMCO";
-				 		neededColumnName=db.deductionTableColumnNames[15];
+				 		neededColumnName=db.deductionTableColumnNames[initTableIndex];
 				 		break;
 				 	}
 				 	case Constant.PAYROLL_BCCI_PDF:{
 				 		title="BCCI";
-				 		neededColumnName=db.deductionTableColumnNames[16];
+				 		neededColumnName=db.deductionTableColumnNames[initTableIndex+1];
 				 		break;
 				 	}
 				 	case Constant.PAYROLL_OCCCI_PDF:{
 				 		title="OCCCI";
-				 		neededColumnName=db.deductionTableColumnNames[17];
+				 		neededColumnName=db.deductionTableColumnNames[initTableIndex+2];
 				 		break;
 				 	}
 				 	case Constant.PAYROLL_DBP_PDF:{
 				 		title="DBP";
-				 		neededColumnName=db.deductionTableColumnNames[18];
+				 		neededColumnName=db.deductionTableColumnNames[initTableIndex+3];
 				 		break;
 				 	}
 				 	case Constant.PAYROLL_CFI_PDF:{
 				 		title="CFI";
-				 		neededColumnName=db.deductionTableColumnNames[19];
+				 		neededColumnName=db.deductionTableColumnNames[initTableIndex+4];
 				 		break;
 				 	}
 				 	case Constant.PAYROLL_ST_PETER_PLAN_PDF:{
 				 		title="ST. PETER";
-				 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[20]);
+				 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[initTableIndex+5]);
 				 		break;
 				 	}
 				 	case Constant.PAYROLL_W_TAX_PDF:{
 				 		title="WITHOLDING TAX";
-				 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[14]);
+				 		neededColumnName=util.addSlantApostropheToString(db.deductionTableColumnNames[initTableIndex-1]);
 				 		break;
 				 	}
 
@@ -730,8 +731,10 @@ public class PDFCreator {
         System.out.println("\tDone creating the PAYROLL pdf!"+CLASS_NAME);
         isSuccessCreatingPDF=true;
 		
+        
+        
         MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all "+title+" summary pdf!", JOptionPane.INFORMATION_MESSAGE);
-
+        
 	}
 	
 
@@ -807,8 +810,8 @@ public class PDFCreator {
         System.out.println("\tDone creating the PAYROLL pdf!"+CLASS_NAME);
         isSuccessCreatingPDF=true;
 		
-        MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all department summary pdf!", JOptionPane.INFORMATION_MESSAGE);
-	}
+      MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all department summary pdf!", JOptionPane.INFORMATION_MESSAGE);
+    }
 	/**
 	 * Create pdf payroll where each employee payroll in each department is shown.
 	 * @param document
@@ -892,6 +895,7 @@ public class PDFCreator {
         isSuccessCreatingPDF=true;
 		
         MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of employee in each department pdf!", JOptionPane.INFORMATION_MESSAGE);
+        
 	}
 	
 	/**
@@ -1067,7 +1071,7 @@ public class PDFCreator {
 		 isSuccessCreatingPDF=true;
 			
 		MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all "+title+" summary pdf!", JOptionPane.INFORMATION_MESSAGE);
-	
+	   
 	}
 	/**
 	 * Create payroll data pdf for LBP and it depends if first pay or second pay of the month.
@@ -1163,6 +1167,7 @@ public class PDFCreator {
 		    isSuccessCreatingPDF=true;
 			
 		    MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all LBP summary pdf!", JOptionPane.INFORMATION_MESSAGE);
+		    
 		}
 		else{
 			
@@ -1250,7 +1255,7 @@ public class PDFCreator {
 		 isSuccessCreatingPDF=true;
 			
 		MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all Medicare summary pdf!", JOptionPane.INFORMATION_MESSAGE);
-
+	   
 	}
 	
 	
@@ -1328,7 +1333,7 @@ public class PDFCreator {
         isSuccessCreatingPDF=true;
 		
         MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all "+title+" summary pdf!", JOptionPane.INFORMATION_MESSAGE);
-
+        
 	}
 	/**
 	 * Create the Union Dues payroll data to be printed in PDF.
@@ -1407,7 +1412,7 @@ public class PDFCreator {
 		 isSuccessCreatingPDF=true;
 			
 		MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all Union Dues summary pdf!", JOptionPane.INFORMATION_MESSAGE);
-
+		 
 	}
 	private void l_________________OVERALL____________________________________l(){}
 	
@@ -1582,7 +1587,6 @@ public class PDFCreator {
 		conditionColumnAndValueList.add(new SelectConditionInfo("", // PayrollDate[it could be earning/deduction, doesnt matter], I made empty because in query, it is already modified. see Database class
 				payrollDate));
 
-	
 		
 		
 		
@@ -1646,7 +1650,7 @@ public class PDFCreator {
 					}
 				}
 				else{
-					cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align right if numbers
+					cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align right even though "-"
 				}
 				if(isTOTALTempBoolean){
 //					cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -1672,6 +1676,10 @@ public class PDFCreator {
 			}
 			
 			
+			//--> Add extra cell
+			cell=initNewNormalCell("-", contentFont);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table.addCell(cell);
 			
 		}
 		
@@ -2389,7 +2397,7 @@ public class PDFCreator {
 			Database db,
 			ArrayList<SelectConditionInfo>conditionColumnAndValueList,
 			String[] joinColumnCompareList,String payrollDate,
-			String payrollDateBefore,Utilities util){
+			String payrollDateBefore,Utilities util,int lbpDbIndex){
 		
 //		private void selectBasedFromColumns(
 //				String[] tableNameList,
@@ -2408,7 +2416,7 @@ public class PDFCreator {
 				//--> Add aditional condition including this payroll date before
 				conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[1],payrollDateBefore ));
 				//--> Add aditional condition to NOT retrieve data with all zero values in a row.
-				conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[11],0 ));
+				conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[lbpDbIndex],0 ));
 				conditionColumnAndValueList.get(conditionColumnAndValueList.size()-1).setSign("!=");
 				
 				
@@ -2416,7 +2424,7 @@ public class PDFCreator {
 				//--> Retrieve all LBP data from database of the chosen payroll date and the payroll date before.
 				db.selectDataInDatabase(
 					new String[]{db.tableNameEmployee,db.tableNameDeductions},
-					new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[11],db.payrollDateTableColumnNames[0],db.tableNameEmployee+"."+db.employeeTableColumnNames[0]}, //FamilyName, FirstName, LBP, PayrollDate, DeductionID 
+					new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[lbpDbIndex],db.payrollDateTableColumnNames[0],db.tableNameEmployee+"."+db.employeeTableColumnNames[0]}, //FamilyName, FirstName, LBP, PayrollDate, DeductionID 
 					conditionColumnAndValueList,
 					joinColumnCompareList,
 					new OrderByInfo(new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3]}, "ASC"),
@@ -2612,7 +2620,7 @@ public class PDFCreator {
 	private PdfPTable processLBPSecondPayTableContent_30thDay(PdfPTable table,
 			Database db,
 			ArrayList<SelectConditionInfo>conditionColumnAndValueList,
-			String[] joinColumnCompareList, Utilities util){
+			String[] joinColumnCompareList, Utilities util, int lbpDbIndex){
 
 //		private String selectInnerJoinWithCondition(
 //		String[] tableNameList,
@@ -2623,7 +2631,7 @@ public class PDFCreator {
 		double totalAllLBP30thValue=0;
 		
 		//--> Add aditional condition to NOT retrieve data with all zero values in a row.
-		conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[11],0 ));
+		conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[lbpDbIndex],0 ));
 		conditionColumnAndValueList.get(conditionColumnAndValueList.size()-1).setSign("!=");
 		//--> Add condition if regular or contractual
 		conditionColumnAndValueList.add(new SelectConditionInfo(
@@ -2647,7 +2655,7 @@ public class PDFCreator {
 		//--> Retrieve data from database
 		db.selectDataInDatabase(
 			new String[]{db.tableNameEmployee,db.tableNameDeductions},
-			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[11]}, //FamilyName, FirstName, LBP 
+			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],db.deductionTableColumnNames[lbpDbIndex]}, //FamilyName, FirstName, LBP 
 			conditionColumnAndValueList,
 			joinColumnCompareList,
 			new OrderByInfo(new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3]},"ASC"), // Sort Ascending order LastName FirstName
@@ -2741,6 +2749,7 @@ public class PDFCreator {
 			String day,Utilities util,
 			String payrollDate,String payrollDateBefore){
 	
+		int lbpDbIndex = 12;
 		
 		//--> Required Query
 //		SELECT  FamilyName, FirstName, LBP 
@@ -2766,7 +2775,7 @@ public class PDFCreator {
 		if(util.isFirstPayOfTheMonth(day)){	
 			table = processLBPFirstPayTableContent_15thDay(table, db,
 					conditionColumnAndValueList, joinColumnCompareList,
-					payrollDate, payrollDateBefore, util);
+					payrollDate, payrollDateBefore, util,lbpDbIndex);
 		}
 		//-----------------------------------------------------------------------------------------------
 		
@@ -2775,7 +2784,7 @@ public class PDFCreator {
 			
 			table = processLBPSecondPayTableContent_30thDay(table,
 					db, conditionColumnAndValueList, joinColumnCompareList,
-					util
+					util,lbpDbIndex
 			);
 		}
 		return table;
@@ -2994,10 +3003,11 @@ public class PDFCreator {
 		
 		//-----------------------------------------------------------------------------------------------
 		//--> Set Condition parameters
+		int unionDuesDbIndex = 11;
 		ArrayList<SelectConditionInfo> conditionColumnAndValueList=new ArrayList<SelectConditionInfo>();
 		conditionColumnAndValueList.add(new SelectConditionInfo(db.deductionTableColumnNames[1],payrollDate )); // PayrollDate
 		//--> Add aditional condition to NOT retrieve data with all zero values in a row.
-		conditionColumnAndValueList.add(new SelectConditionInfo(util.addSlantApostropheToString(db.deductionTableColumnNames[10]),0 )); //Un-Dues 
+		conditionColumnAndValueList.add(new SelectConditionInfo(util.addSlantApostropheToString(db.deductionTableColumnNames[unionDuesDbIndex]),0 )); //Un-Dues 
 		conditionColumnAndValueList.get(conditionColumnAndValueList.size()-1).setSign("!=");
 		//--> Add condition if regular or contractual
 		conditionColumnAndValueList.add(new SelectConditionInfo(
@@ -3037,7 +3047,7 @@ public class PDFCreator {
 		//--> Retrieve data from database
 		db.selectDataInDatabase(
 			new String[]{db.tableNameEmployee,db.tableNameDeductions},
-			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],util.addSlantApostropheToString(db.deductionTableColumnNames[10])}, //FamilyName, FirstName, UnionDues
+			new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3],util.addSlantApostropheToString(db.deductionTableColumnNames[unionDuesDbIndex])}, //FamilyName, FirstName, UnionDues
 			conditionColumnAndValueList,
 			joinColumnCompareList,
 			new OrderByInfo(new String[]{db.employeeTableColumnNames[2],db.employeeTableColumnNames[3]},"ASC"), // Sort Ascending order LastName FirstName
@@ -3685,13 +3695,17 @@ public class PDFCreator {
 		//--> Transfer the correct columns in new array strings
 		if(correctDedsColumnList==null && correctEarnColumnList==null){
 			correctEarnColumnList=new String[db.earningTableColumnNames.length-1-numOfFirstColumnsNotIncluded];
-			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded];
+			//-> Add plus 1 for extra cell since deduction count is not even numbers
+			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded+1];
+
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.earningTableColumnNames.length-1;i++,j++){
 				correctEarnColumnList[j]=db.earningTableColumnNames[i];
 			}
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.deductionTableColumnNames.length-2;i++,j++){
 				correctDedsColumnList[j]=db.deductionTableColumnNames[i];
 			}
+			//-> Add plus 1 for extra cell since deduction count is not even numbers
+			correctDedsColumnList[correctDedsColumnList.length-1]="";
 		}
 		
 		//-----------------------------------------------
