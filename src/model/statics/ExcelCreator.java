@@ -549,8 +549,7 @@ public class ExcelCreator {
 			workbook.close();
 			
 			
-//			mainFrame.showOptionPaneMessageDialog("Excel file successfully created!", JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("\tUNcomment  mainframe");
+			mainFrame.showOptionPaneMessageDialog("Excel file successfully created!", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	 /**
