@@ -92,9 +92,9 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_OVERALL_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_OVERALL_EXCEL, mainFrame);
+		
 		
 		assertEquals(true,true );
 	}
@@ -113,9 +113,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_ASEMCO_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_ASEMCO_EXCEL, mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -135,9 +134,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_BCCI_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_BCCI_EXCEL, mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -151,15 +149,15 @@ public class EXCELCreatorTestCase {
 		DisplayOptionsDialog dialog=payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL;
 		
 		//--> Oct 31, 2019
-		dialog.payrollDateComboBox.setSelectedIndex(2); 
+		dialog.payrollDateComboBox.setSelectedIndex(1); 
 		
 		System.out.println("\n\tPAYROLL_OVERALL_PDF");
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_OCCCI_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_OCCCI_EXCEL,mainFrame);
+		
 		
 		assertEquals(true,true );
 	}
@@ -179,9 +177,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_DBP_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_DBP_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -201,9 +198,9 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_CFI_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_CFI_EXCEL,mainFrame);
+		
 		
 		assertEquals(true,true );
 	}
@@ -222,9 +219,9 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_ST_PETER_PLAN_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_ST_PETER_PLAN_EXCEL,mainFrame);
+		
 		
 		assertEquals(true,true );
 	}
@@ -245,9 +242,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_W_TAX_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_W_TAX_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -267,9 +263,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_LBP_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_LBP_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -282,15 +277,14 @@ public class EXCELCreatorTestCase {
 		DisplayOptionsDialog dialog=payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL;
 		
 		//--> Oct 31, 2019
-		dialog.payrollDateComboBox.setSelectedIndex(1); 
+		dialog.payrollDateComboBox.setSelectedIndex(2); 
 		
 		System.out.println("\n\tPAYROLL_OVERALL_PDF");
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_SSS_LOAN_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_SSS_LOAN_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -310,9 +304,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_PAGIBIG_LOAN_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_PAGIBIG_LOAN_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -331,9 +324,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_UNION_DUES_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_UNION_DUES_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -352,9 +344,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_SSS_CONT_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_SSS_CONT_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -373,9 +364,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_HDMF_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_HDMF_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
@@ -395,9 +385,8 @@ public class EXCELCreatorTestCase {
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		
-		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
-		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_MEDICARE_PDF);
+		MainFrame mainFrame = MainFrame.getInstance();
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_MEDICARE_EXCEL,mainFrame);
 		
 		assertEquals(true,true );
 	}
