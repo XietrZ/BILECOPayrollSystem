@@ -280,7 +280,7 @@ public class ExcelCreator {
 	 * @throws RowsExceededException 
 	 * @throws SQLException 
 	 */
-	private void createExcel(String filename,int mode,MainFrame mainFrame) throws IOException, RowsExceededException, WriteException, SQLException, DocumentException{
+	public void createExcel(String filename,int mode,MainFrame mainFrame) throws IOException, RowsExceededException, WriteException, SQLException, DocumentException{
 		
 		
 		//--> Name of excel file
@@ -548,7 +548,8 @@ public class ExcelCreator {
 			workbook.close();
 			
 			
-			mainFrame.showOptionPaneMessageDialog("Excel file successfully created!", JOptionPane.INFORMATION_MESSAGE);
+//			mainFrame.showOptionPaneMessageDialog("Excel file successfully created!", JOptionPane.INFORMATION_MESSAGE);
+			System.out.println("\tUNcomment  mainframe");
 		}
 	}
 	 /**
@@ -693,7 +694,7 @@ public class ExcelCreator {
 		//---------------------------
 		//--> Add Signature content
 		wsheet=processPayrollContentSignature(wsheet, util, Constant.PAYROLL_PER_DEPARTMENT_EXCEL);
-	
+		
 		isSuccessCreatingEXCEL=true;
 	}
 	
@@ -3542,14 +3543,21 @@ public class ExcelCreator {
 		
 		//--> Transfer the correct columns in new array strings
 		if(correctDedsColumnList==null && correctEarnColumnList==null){
+			
 			correctEarnColumnList=new String[db.earningTableColumnNames.length-1-numOfFirstColumnsNotIncluded];
-			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded];
+			//--> Added extra 1 for extra empty column header
+			correctDedsColumnList= new String[db.deductionTableColumnNames.length-2-numOfFirstColumnsNotIncluded+1]; 
+			
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.earningTableColumnNames.length-1;i++,j++){
 				correctEarnColumnList[j]=db.earningTableColumnNames[i];
 			}
 			for(int i=numOfFirstColumnsNotIncluded,j=0;i<db.deductionTableColumnNames.length-2;i++,j++){
 				correctDedsColumnList[j]=db.deductionTableColumnNames[i];
 			}
+			//--> Added extra 1 for extra empty column header
+			correctDedsColumnList[correctDedsColumnList.length-1]="";
+			
+			
 		}
 		
 		//-----------------------------------------------
