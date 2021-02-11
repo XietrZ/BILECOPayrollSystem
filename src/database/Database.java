@@ -1090,6 +1090,47 @@ public class Database {
 	}
 	
 	/**
+	 * Get the Mandatory Provident Fund EE value from SSS Data List.
+	 * @param ec
+	 * @param er
+	 * @return
+	 */
+	public double getMandaProvFundEEFromSSSDataList(double ee, double er, double salary){
+		
+		for(int key:sssDataList.keySet()){
+			SssInfo sssInfo=sssDataList.get(key);
+			
+			if(sssInfo.ee==ee && sssInfo.er==er && ( salary>=sssInfo.minimumRange && salary<=sssInfo.maximumRange)){
+				return sssInfo.mandaProvFundEe;
+			}
+		}
+		
+		return 0;
+	}
+	
+	
+	/**
+	 * Get the Mandatory Provident Fund ER value from SSS Data List.
+	 * @param ec
+	 * @param er
+	 * @return
+	 */
+	public double getMandaProvFundERFromSSSDataList(double ee, double er , double salary){
+		
+		for(int key:sssDataList.keySet()){
+			SssInfo sssInfo=sssDataList.get(key);
+			
+			if(sssInfo.ee==ee && sssInfo.er==er  && ( salary>=sssInfo.minimumRange && salary<=sssInfo.maximumRange) ){
+				return sssInfo.mandaProvFundEr;
+			}
+		}
+		
+		return 0;
+	}
+	
+	
+	
+	/**
 	 * Get the number of years service based from a given employee ID.
 	 * @param employeeID
 	 * @return
@@ -1409,7 +1450,9 @@ public class Database {
 								(Double) resultSet.getObject(4),
 								(Double) resultSet.getObject(5),
 								(Double) resultSet.getObject(6),
-								(Double) resultSet.getObject(7)
+								(Double) resultSet.getObject(7),
+								(Double) resultSet.getObject(8),
+								(Double) resultSet.getObject(9)
 							) 
 				);
 				
@@ -1425,7 +1468,9 @@ public class Database {
 						+"\tMonthly Salary Credit: "+sssInfo.monthlySalaryCredit
 						+"\tEe: "+sssInfo.ee
 						+"\tEr: "+sssInfo.er
-						+"\tEcEr: "+sssInfo.ecEr+CLASS_NAME);
+						+"\tEcEr: "+sssInfo.ecEr
+						+"\tMandaProvFundEE: "+sssInfo.mandaProvFundEe
+						+"\tMandaProvFundER: "+sssInfo.mandaProvFundEr+CLASS_NAME);
 			}
 			
 			

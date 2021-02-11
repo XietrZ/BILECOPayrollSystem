@@ -348,7 +348,7 @@ public class PDFCreatorTestCase {
 		//--> Oct 31, 2019
 		dialog.payrollDateComboBox.setSelectedIndex(1); 
 		
-		System.out.println("\n\tPAYROLL_OVERALL_PDF");
+		System.out.println("\nPAYROLL_OVERALL_PDF"+CLASS_NAME);
 		System.out.println("\tFuck_1.0: dialog.payrollDateComboBox: "+dialog.payrollDateComboBox.getSelectedItem().toString()+CLASS_NAME);
 		System.out.println();
 		

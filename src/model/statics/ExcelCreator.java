@@ -3165,6 +3165,8 @@ public class ExcelCreator {
 		list.add("EE");
 		list.add("ER");
 		list.add("EC");
+		list.add("Mandatory Provident Fund Ee");
+		list.add("Mandatory Provident Fund Er");
 		list.add("TOTAL");
 		
 		return list;
@@ -3246,8 +3248,9 @@ public class ExcelCreator {
 		db.selectDataInDatabase(
 			new String[]{db.tableNameEmployee,db.tableNameDeductions,db.tableNameEmployerShare},
 			new String[]{
-					db.employeeTableColumnNames[2],
-					db.employeeTableColumnNames[3],
+					db.employeeTableColumnNames[2], // Last Name
+					db.employeeTableColumnNames[3], // First Name
+					db.employeeTableColumnNames[11],// Salary
 					db.deductionTableColumnNames[5],
 					db.employerShareTableColumnNames[3]
 			}, //FamilyName, FirstName, SSSCont, SSS Er 
@@ -3258,7 +3261,7 @@ public class ExcelCreator {
 		);
 		
 		//--> Set the total value list
-		int totalColumnsNeeded=4;// EE , ER, EC and Total
+		int totalColumnsNeeded=6;// EE , ER, EC, MandaProvFund_EE, MandaProvFund_ER and Total
 		for(int i=0;i<totalColumnsNeeded;i++){
 			totalAllSSSCont30thValueList.add(new Double(0));
 		}
@@ -3280,14 +3283,21 @@ public class ExcelCreator {
 				colIndex++;
 				
 				
-				double totalSSSContValue=0,ee=-1,er=-1;
-				//> Why 2 since in the name part we combine two columns LastName and FirstName
+				double totalSSSContValue=0,ee=0,er=0,ec=0,mandaProvFund_EE=0,mandaProvFund_ER=0,monthlySalary=0;//> Why 2 since in the name part we combine two columns LastName and FirstName
 				for(int j=2;j<=db.metaData.getColumnCount();j++){
 					String data=(j==2)?
 							db.resultSet.getObject(j-1).toString()+", "+db.resultSet.getObject(j).toString()
 							:
 							db.resultSet.getObject(j).toString();	
 					
+					// FOr monthly salary
+					if(j==3){
+						monthlySalary = Double.parseDouble(data);
+						j++;
+						data = db.resultSet.getObject(j).toString();
+					}
+							
+							
 					sheet=(j>=db.metaData.getColumnCount()-1)?
 							addNumberDouble(sheet, colIndex, rowIndex, Double.parseDouble(data), timesCenterRightWithBorder)
 							:
@@ -3321,9 +3331,9 @@ public class ExcelCreator {
 				}
 				
 				//> Process the EC part of the column
-				double ec=db.getECFromSSSDataList(ee, er);
+				ec=db.getECFromSSSDataList(ee, er);
 				totalAllSSSCont30thValueList.set(2, 
-				totalAllSSSCont30thValueList.get(2)+ec); // Set the totalAll values of Total column
+				totalAllSSSCont30thValueList.get(2)+ec); // Set the totalAll values of EC column
 				
 				sheet=addNumberDouble(sheet, colIndex, rowIndex,
 						ec,
@@ -3333,12 +3343,38 @@ public class ExcelCreator {
 				totalSSSContValue+=ec;
 				
 				
-				//-------------------------------------
+				//--> Process the MANDATORY PROVIDENT FUND EE part of the column
+				mandaProvFund_EE=db.getMandaProvFundEEFromSSSDataList(ee, er, monthlySalary);
+				totalAllSSSCont30thValueList.set(3, 
+				totalAllSSSCont30thValueList.get(3)+mandaProvFund_EE); // Set the totalAll values of EC column
 				
+				sheet=addNumberDouble(sheet, colIndex, rowIndex,
+						mandaProvFund_EE,
+						timesCenterRightWithBorder);
+							
+				colIndex++;
+				totalSSSContValue+=mandaProvFund_EE;
+				
+				
+				//--> Process the MANDATORY PROVIDENT FUND ER part of the column
+				mandaProvFund_ER=db.getMandaProvFundERFromSSSDataList(ee, er, monthlySalary);
+				totalAllSSSCont30thValueList.set(4, 
+				totalAllSSSCont30thValueList.get(4)+mandaProvFund_ER); // Set the totalAll values of EC column
+				
+				sheet=addNumberDouble(sheet, colIndex, rowIndex,
+						mandaProvFund_ER,
+						timesCenterRightWithBorder);
+							
+				colIndex++;
+				totalSSSContValue+=mandaProvFund_ER;
+				
+				
+				
+				//-------------------------------------
 				//> Add The Total in table
 				//> WHy 2? since the TOTAL column in the table is at index 2 on the variable totalAllHDMF30thValueList.
-				totalAllSSSCont30thValueList.set(3, 
-						totalAllSSSCont30thValueList.get(3)+totalSSSContValue); // Set the totalAll values of Total column
+				totalAllSSSCont30thValueList.set(5, 
+						totalAllSSSCont30thValueList.get(5)+totalSSSContValue); // Set the totalAll values of Total column
 				
 				totalSSSContValue=util.convertRoundToOnlyTwoDecimalPlaces(totalSSSContValue);
 				sheet=addNumberDouble(sheet, colIndex, rowIndex,
@@ -3355,7 +3391,7 @@ public class ExcelCreator {
 
 		
 		//-----------------------------------------------------------------------------------------
-		//--> Process ALL TOTAL Union Dues.
+		//--> Process ALL TOTAL SSS CONT.
 		colIndex=0;
 		rowIndex=sheet.getRows();
 		
@@ -3398,12 +3434,32 @@ public class ExcelCreator {
 		colIndex++;
 		
 		
-				
+		
 		//------------
-		//> Total All Value of Total Column 
+		//> Total All Value of Mandatory Provident Fund EE Column
 		totalAllSSSCont30thValueList.set(3, util.convertRoundToOnlyTwoDecimalPlaces(totalAllSSSCont30thValueList.get(3)));
 		sheet=addNumberDouble(sheet, colIndex, rowIndex,
 				totalAllSSSCont30thValueList.get(3), timesBoldRightWithBorderMedium
+		);
+		colIndex++;
+		
+		
+		//------------
+		//> Total All Value of Mandatory Provident Fund ER Column
+		totalAllSSSCont30thValueList.set(4, util.convertRoundToOnlyTwoDecimalPlaces(totalAllSSSCont30thValueList.get(4)));
+		sheet=addNumberDouble(sheet, colIndex, rowIndex,
+				totalAllSSSCont30thValueList.get(4), timesBoldRightWithBorderMedium
+		);
+		colIndex++;
+		
+		
+		
+		
+		//------------
+		//> Total All Value of Total Column 
+		totalAllSSSCont30thValueList.set(5, util.convertRoundToOnlyTwoDecimalPlaces(totalAllSSSCont30thValueList.get(5)));
+		sheet=addNumberDouble(sheet, colIndex, rowIndex,
+				totalAllSSSCont30thValueList.get(5), timesBoldRightWithBorderMedium
 		);
 		colIndex++;
 		

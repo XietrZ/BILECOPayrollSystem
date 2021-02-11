@@ -1254,7 +1254,7 @@ public class PDFCreator {
 		System.out.println("\tDone creating the PAYROLL pdf!"+CLASS_NAME);
 		 isSuccessCreatingPDF=true;
 			
-		MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all Medicare summary pdf!", JOptionPane.INFORMATION_MESSAGE);
+		MainFrame.getInstance().showOptionPaneMessageDialog("Done creating the payroll of all SSS Cont summary pdf!", JOptionPane.INFORMATION_MESSAGE);
 	   
 	}
 	
@@ -3405,6 +3405,8 @@ public class PDFCreator {
 		list.add("EE");
 		list.add("ER");
 		list.add("EC");
+		list.add("Mandatory Provident Fund Ee");
+		list.add("Mandatory Provident Fund Er");
 		list.add("TOTAL");
 		
 		return list;
@@ -3484,8 +3486,9 @@ public class PDFCreator {
 		db.selectDataInDatabase(
 			new String[]{db.tableNameEmployee,db.tableNameDeductions,db.tableNameEmployerShare},
 			new String[]{
-					db.employeeTableColumnNames[2],
-					db.employeeTableColumnNames[3],
+					db.employeeTableColumnNames[2], // FamilyName
+					db.employeeTableColumnNames[3], // LastName
+					db.employeeTableColumnNames[11],// Monthly Salary
 					db.deductionTableColumnNames[5],
 					db.employerShareTableColumnNames[3]
 			}, //FamilyName, FirstName, SSSCont, SSS Er 
@@ -3496,7 +3499,7 @@ public class PDFCreator {
 		);
 		
 		//--> Set the total value list
-		int totalColumnsNeeded=4;// EE , ER, EC and Total
+		int totalColumnsNeeded=6;// EE , ER, EC, MandaProvFund_EE, MandaProvFund_ER and Total
 		for(int i=0;i<totalColumnsNeeded;i++){
 			totalAllSSSCont30thValueList.add(new Double(0));
 		}
@@ -3516,7 +3519,7 @@ public class PDFCreator {
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER); // Align center and number indicator data.
 				table.addCell(cell);
 				
-				double totalSSSContValue=0,ee=0,er=0;
+				double totalSSSContValue=0,ee=0,er=0,ec=0,mandaProvFund_EE=0,mandaProvFund_ER=0,monthlySalary=0;
 				//> Why 2 since in the name part we combine two columns LastName and FirstName
 				for(int j=2;j<=db.metaData.getColumnCount();j++){
 					String data=(j==2)?
@@ -3524,6 +3527,12 @@ public class PDFCreator {
 							:
 							db.resultSet.getObject(j).toString();	
 					
+					// FOr monthly salary
+					if(j==3){
+						monthlySalary = Double.parseDouble(data);
+						j++;
+						data = db.resultSet.getObject(j).toString();
+					}
 					cell= initNewNormalCell(
 							(j>=db.metaData.getColumnCount()-1)?util.insertComma(data)+"\t":data,
 							contentFont
@@ -3556,9 +3565,9 @@ public class PDFCreator {
 				}
 				
 				//> Process the EC part of the column
-				double ec=db.getECFromSSSDataList(ee, er);
+				ec=db.getECFromSSSDataList(ee, er);
 				totalAllSSSCont30thValueList.set(2, 
-				totalAllSSSCont30thValueList.get(2)+ec); // Set the totalAll values of Total column
+						totalAllSSSCont30thValueList.get(2)+ec); // Set the totalAll values of EC column
 				cell= initNewNormalCell(util.insertComma(""+ec), contentFont);
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align center and number indicator data.
 				table.addCell(cell);
@@ -3566,12 +3575,35 @@ public class PDFCreator {
 				totalSSSContValue+=ec;
 				
 				
+				//> Process the MANDATORY PROVIDENT FUND EE part of the column
+				mandaProvFund_EE=db.getMandaProvFundEEFromSSSDataList(ee, er,monthlySalary);
+				totalAllSSSCont30thValueList.set(3, 
+						totalAllSSSCont30thValueList.get(3)+mandaProvFund_EE); // Set the totalAll values of MANDATORY PROVIDENT FUND EE column
+				cell= initNewNormalCell(util.insertComma(""+mandaProvFund_EE), contentFont);
+				cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align center and number indicator data.
+				table.addCell(cell);
+				
+				totalSSSContValue+=mandaProvFund_EE;
+				
+				
+				//> Process the MANDATORY PROVIDENT FUND EC part of the column
+				mandaProvFund_ER=db.getMandaProvFundERFromSSSDataList(ee, er,monthlySalary);
+				totalAllSSSCont30thValueList.set(4, 
+						totalAllSSSCont30thValueList.get(4)+mandaProvFund_ER); // Set the totalAll values of MANDATORY PROVIDENT FUND ER column
+				cell= initNewNormalCell(util.insertComma(""+mandaProvFund_ER), contentFont);
+				cell.setHorizontalAlignment(Element.ALIGN_RIGHT); // Align center and number indicator data.
+				table.addCell(cell);
+				
+				totalSSSContValue+=mandaProvFund_ER;
+				
+				
+				
 				//-------------------------------------
 				
 				//> Add The Total in table
-				//> WHy 2? since the TOTAL column in the table is at index 2 on the variable totalAllHDMF30thValueList.
-				totalAllSSSCont30thValueList.set(3, 
-						totalAllSSSCont30thValueList.get(3)+totalSSSContValue); // Set the totalAll values of Total column
+				//> WHy 2? since the TOTAL column in the table is at index 5 on the variable totalAllHDMF30thValueList.
+				totalAllSSSCont30thValueList.set(5, 
+						totalAllSSSCont30thValueList.get(5)+totalSSSContValue); // Set the totalAll values of Total column
 				
 				String totalValueSTRING=util.insertComma(util.convertRoundToOnlyTwoDecimalPlaces(totalSSSContValue));
 				
@@ -3585,7 +3617,7 @@ public class PDFCreator {
 		}
 		
 		//-----------------------------------------------------------------------------------------
-		//--> Process ALL TOTAL Union Dues.
+		//--> Process ALL TOTAL SSS CONT.
 		Font headerFont =new  Font(FontFamily.HELVETICA, 9, Font.BOLDITALIC, BaseColor.BLACK);
 		BaseColor color=BaseColor.WHITE;
 		
@@ -3643,12 +3675,38 @@ public class PDFCreator {
 		headerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		headerCell.setBorderWidth(1);
 		table.addCell(headerCell);
-				
+		
 		//------------
-		//> Total All Value of Total Column 
+		//> Total All Value of Mandatory Provident Fund EE Column 
 		totalAllSSSCont30thValueList.set(3, util.convertRoundToOnlyTwoDecimalPlaces(totalAllSSSCont30thValueList.get(3)));
 		p= initNewPhrase(
-				""+util.insertComma(totalAllSSSCont30thValueList.get(3)),
+			""+util.insertComma(totalAllSSSCont30thValueList.get(3)),
+			headerFont
+		);
+		headerCell=initNewHeaderCell(p,color);
+		headerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		headerCell.setBorderWidth(1);
+		table.addCell(headerCell);
+		
+		
+		//------------
+		//> Total All Value of Mandatory Provident Fund ER Column 
+		totalAllSSSCont30thValueList.set(4, util.convertRoundToOnlyTwoDecimalPlaces(totalAllSSSCont30thValueList.get(4)));
+		p= initNewPhrase(
+			""+util.insertComma(totalAllSSSCont30thValueList.get(4)),
+			headerFont
+		);
+		headerCell=initNewHeaderCell(p,color);
+		headerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		headerCell.setBorderWidth(1);
+		table.addCell(headerCell);
+		
+		
+		//------------
+		//> Total All Value of Total Column 
+		totalAllSSSCont30thValueList.set(5, util.convertRoundToOnlyTwoDecimalPlaces(totalAllSSSCont30thValueList.get(5)));
+		p= initNewPhrase(
+				""+util.insertComma(totalAllSSSCont30thValueList.get(5)),
 				headerFont
 		);
 		headerCell=initNewHeaderCell(p,color);
