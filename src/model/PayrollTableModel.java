@@ -96,7 +96,6 @@ public class PayrollTableModel extends AbstractTableModel{
 		this.tableModelResultSet=r;
 		
 		if(tableModelMetaData!=null && tableModelResultSet!=null){
-			Database db= Database.getInstance();
 			Utilities util= Utilities.getInstance();
 		    
 			

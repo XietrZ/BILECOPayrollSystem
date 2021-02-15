@@ -143,7 +143,10 @@ public class Utilities {
 	 * @return
 	 */
 	public String convertCamelCaseColumnNamesToReadable(String columnName){
-				
+		if(columnName.equals("MandaProvFundEe") || columnName.equals("MandaProvFundEr")){
+			return columnName;
+		}
+		
 		columnName=columnName.replaceAll("([A-Z][a-z]+)", " $1") // Words beginning with UC
 	             .replaceAll("([A-Z][A-Z]+)", " $1") // "Words" of only UC
 	            // .replaceAll("([^A-Za-z ]+)", " $1") // "Words" of non-letters
