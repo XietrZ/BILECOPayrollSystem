@@ -12,7 +12,7 @@ import java.awt.Toolkit;
  */
 public class Constant {
 	
-	public final static String PAYROLL_SYSTEM_VERSION="version 1.6",
+	public final static String PAYROLL_SYSTEM_VERSION="version 1.7",
 			LOCKED_STATUS="Locked",NOT_LOCKED_STATUS="Not Locked";
 	
 	
