@@ -126,7 +126,7 @@ public class Images {
 //			showDisplayOptionsImg,showDisplayOptionsImgHover,
 			edBackBtnImg,edBackBtnImgHover,
 			edAddImg,edAddImgHover, edCancelImg,edCancelImgHover, edDeleteImg,edDeleteImgHover, edEditImg, edEditImgHover, edSaveImg, edSaveImgHover,
-			edCalcIconImg, edCalcIconImgHover,
+			edCalcIconImg, edCalcIconImgHover,edRetrievePrevDataIconImg, edRetrievePrevDataIconImgHover,
 			
 		//--> Earning View Panel Images
 		earningViewTitleImg,earningShowAllDataImg,earningShowAllDataImgHover,
