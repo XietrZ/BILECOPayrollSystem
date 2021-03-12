@@ -509,7 +509,8 @@ public class Images {
 		edSaveImgHover=newImageIcon(imageFolder+bothEarningDeductionFolder+"SaveButtonGroupHover.png");
 		edCalcIconImg=newImageIcon(imageFolder+bothEarningDeductionFolder+"CalculateIconGroup.png");
 		edCalcIconImgHover=newImageIcon(imageFolder+bothEarningDeductionFolder+"CalculateIconGroupHover.png");
-		
+		edRetrievePrevDataIconImg=newImageIcon(imageFolder+bothEarningDeductionFolder+"RetrieveDataIconGroup.png");
+		edRetrievePrevDataIconImgHover=newImageIcon(imageFolder+bothEarningDeductionFolder+"RetrieveDataIconGroupHover.png");
 		
 		
 	}

@@ -324,6 +324,7 @@ public class Controller implements WindowListener{
 			bothEarningDeductionViewPanel.showEmployerShareBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.hideEmployerShareBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.calculateBtn.addActionListener(earningDeductionViewPanelListener);
+			bothEarningDeductionViewPanel.retrievePrevValueBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.saveBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.cancelBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.backBtn.addActionListener(earningDeductionViewPanelListener);
