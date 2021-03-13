@@ -51,8 +51,7 @@ import controller.listeners.ListenerEarningDeductionViewPanel;
 import java.awt.GridLayout;
 
 public class EarningsAndDeductionLayout extends JPanel {
-	private final String CLASS_NAME = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-			+ this.getClass().getSimpleName() + ".java";
+	private final String CLASS_NAME = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+ this.getClass().getSimpleName() + ".java";
 	private int topLeftBtnWidth = 73, topLeftBtnHeight = 34;
 
 	private void l_________________________________l() {
@@ -71,7 +70,7 @@ public class EarningsAndDeductionLayout extends JPanel {
 	public JLabel label, rowCountLabel;
 	public JScrollPane dynamicTableScrollPane, fixedTableScrollPane,
 			fullScreenTableScrollPane, totalTableScrollPane;
-	public OptionViewPanel calculationPanel, calculationContractualPanel;
+	public OptionViewPanel calculationPanel, calculationContractualPanel, retrievePrevValOptionalPanel;
 	public JPanel showDisplayPanel;
 	public boolean isUpdateColumnComboBox = true;
 	public JComboBox<String> payrollDateComboBox, departmentComboBox,
@@ -103,6 +102,7 @@ public class EarningsAndDeductionLayout extends JPanel {
 	private void set() {
 		setThisPanelComponents();
 		setCalculationPanelComponents();
+		setRetrievePrevValOptionalPanelComponents();
 		setTopLeftPanelComponents();
 		setCalcRetrieveBtnPanelComponents();
 		setShowDisplayPanel();
@@ -198,6 +198,16 @@ public class EarningsAndDeductionLayout extends JPanel {
 		calculationPanel = new OptionViewPanel(buttonKeyList, null, imageList,
 				imageHoverList, 150, 44, 144, 75);
 		add(calculationPanel);
+	}
+	
+	private void setRetrievePrevValOptionalPanelComponents() {
+		String[] buttonKeyList = null;
+		ImageIcon[] imageList = null;
+		ImageIcon[] imageHoverList = null;
+
+		retrievePrevValOptionalPanel = new OptionViewPanel(buttonKeyList, null, imageList,
+				imageHoverList, 200, 44, 144, 75);
+		add(retrievePrevValOptionalPanel);
 	}
 
 	/**
@@ -414,23 +424,25 @@ public class EarningsAndDeductionLayout extends JPanel {
 		}
 	}
 
-	public void setNecessaryCalculatePanelComponentsWhenExtended(
+	public OptionViewPanel setNecessaryOptionViewPanelComponentsWhenExtended(
 			ImageIcon bgImg, int width, int height, String[] buttonKeyList,
-			ImageIcon[] imageList, ImageIcon[] imageHoverList) {
+			ImageIcon[] imageList, ImageIcon[] imageHoverList, OptionViewPanel panel) {
 
 		// --> Set Calculation Panel
-		calculationPanel.setLayout(null);
-		calculationPanel.setOpaque(false);
-		calculationPanel.bg.setIcon(bgImg);
-		calculationPanel.setLocation(218 - width, 44);
-		calculationPanel.setSize(width, height);
-		calculationPanel.bg.setBounds(0, 0, calculationPanel.getWidth(),
-				calculationPanel.getHeight());
+		panel.setLayout(null);
+		panel.setOpaque(false);
+		panel.bg.setIcon(bgImg);
+		panel.setLocation(218 - width, 44);
+		panel.setSize(width, height);
+		panel.bg.setBounds(0, 0, panel.getWidth(),
+				panel.getHeight());
 
-		calculationPanel.initNewListValues(buttonKeyList, imageList,
+		panel.initNewListValues(buttonKeyList, imageList,
 				imageHoverList);
-		calculationPanel.addOptionButtons();
+		panel.addOptionButtons();
 		repaint();
+		
+		return panel;
 
 	}
 
@@ -444,7 +456,7 @@ public class EarningsAndDeductionLayout extends JPanel {
 	 * @param showAllDataImg
 	 * @param showAllDataImgHover
 	 */
-	public void setNecessaryOptionPanelComponentsWhenExtended(
+	public void setNecessaryLabelComponentsWhenExtended(
 			int titleLabelNewWidths, int titleLabelNewHeight,
 			ImageIcon labelNewImg, ImageIcon showAllDataImg,
 			ImageIcon showAllDataImgHover) {

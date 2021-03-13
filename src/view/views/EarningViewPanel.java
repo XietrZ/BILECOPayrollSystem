@@ -29,7 +29,7 @@ public class EarningViewPanel extends EarningsAndDeductionLayout {
 	 * Set Calculation Panel on Contractual
 	 */
 	public void setCalculationPanelContractual(){
-		setNecessaryOptionPanelComponentsWhenExtended(136,26, img.earningViewTitleImg,
+		setNecessaryLabelComponentsWhenExtended(136,26, img.earningViewTitleImg,
 				img.earningShowAllDataImg,img.earningShowAllDataImgHover);	
 		
 
@@ -48,8 +48,8 @@ public class EarningViewPanel extends EarningsAndDeductionLayout {
 				img.generateSubTotalImgHover,
 		};
 		
-		setNecessaryCalculatePanelComponentsWhenExtended(img.earningContractualCalculateOptionsImg, 154, 58,
-				buttonKeyList, imageList, imageHoverList);
+		calculationPanel =setNecessaryOptionViewPanelComponentsWhenExtended(img.earningContractualCalculateOptionsImg, 154, 58,
+				buttonKeyList, imageList, imageHoverList, calculationPanel);
 		
 		this.repaint();
 		this.revalidate();
@@ -59,7 +59,7 @@ public class EarningViewPanel extends EarningsAndDeductionLayout {
 	 * Set the calculation panel when the mode is regular
 	 */
 	public void setCalculationPanelRegular(){
-		setNecessaryOptionPanelComponentsWhenExtended(136,26, img.earningViewTitleImg,
+		setNecessaryLabelComponentsWhenExtended(136,26, img.earningViewTitleImg,
 				img.earningShowAllDataImg,img.earningShowAllDataImgHover);	
 		
 		
@@ -87,8 +87,46 @@ public class EarningViewPanel extends EarningsAndDeductionLayout {
 				img.generateRiceImgHover,
 				img.generateOvertimeImgHover
 		};
-		setNecessaryCalculatePanelComponentsWhenExtended(img.earningRegularCalculateOptionsImg, 154, 121,
-				buttonKeyList, imageList, imageHoverList);
+		calculationPanel = setNecessaryOptionViewPanelComponentsWhenExtended(img.earningRegularCalculateOptionsImg, 154, 121,
+				buttonKeyList, imageList, imageHoverList,calculationPanel);
+		
+		this.repaint();
+		this.revalidate();
+	}
+	
+
+	/**
+	 * Set the retrieve prev value panel when the mode is regular
+	 */
+	public void setRetrievePrevVaueOptionalViewPanelRegular(){
+//		setNecessaryLabelComponentsWhenExtended(174, 26, img.deductionViewTitleImg,
+//				img.deductionShowAllDataImg,img.deductionShowAllDataImgHover);
+		
+		
+		String[] buttonKeyList={
+				Constant.RETRIEVE_PREV_VALUE_SAL_ADJ_BTN,
+				Constant.RETRIEVE_PREV_VALUE_NS_DIFF_BTN,
+				Constant.RETRIEVE_PREV_VALUE_RATA_BTN,
+				Constant.RETRIEVE_PREV_VALUE_LWPAY_BTN
+		};
+		ImageIcon[] imageList={
+				img.retrievePrevValueSalAdjImg,
+				img.retrievePrevValueNsDiffImg,
+				img.retrievePrevValueRATAImg,
+				img.retrievePrevValueLwPayImg
+		};
+		ImageIcon[] imageHoverList={
+				img.retrievePrevValueSalAdjImgHover,
+				img.retrievePrevValueNsDiffImgHover,
+				img.retrievePrevValueRATAImgHover,
+				img.retrievePrevValueLwPayImgHover
+		};
+		retrievePrevValOptionalPanel = setNecessaryOptionViewPanelComponentsWhenExtended(
+				img.earningRetrievePrevValueOptionImg, 208, 85,
+				buttonKeyList, imageList, imageHoverList, retrievePrevValOptionalPanel);
+		
+		//--> Match the triangle in calculation button
+		retrievePrevValOptionalPanel.setLocation(40,44);
 		
 		this.repaint();
 		this.revalidate();

@@ -131,6 +131,7 @@ public class Images {
 		//--> Earning View Panel Images
 		earningViewTitleImg,earningShowAllDataImg,earningShowAllDataImgHover,
 			earningRegularCalculateOptionsImg,
+			earningRetrievePrevValueOptionImg,
 			generateRegularPayImg,generateRegularPayImgHover,
 			generateOvertimeImg,generateOvertimeImgHover,
 			generateEcolaImg, generateEcolaImgHover,
@@ -141,10 +142,17 @@ public class Images {
 			earningContractualCalculateOptionsImg,
 			generateRatePerDayImg, generateRatePerDayImgHover,
 			generateSubTotalImg, generateSubTotalImgHover,
-		
+			
+			retrievePrevValueSalAdjImg,retrievePrevValueSalAdjImgHover,
+			retrievePrevValueNsDiffImg,retrievePrevValueNsDiffImgHover,
+			retrievePrevValueRATAImg,retrievePrevValueRATAImgHover,
+			retrievePrevValueLwPayImg,retrievePrevValueLwPayImgHover,
+			
+			
 		//--> Deduction View Panel Images
 		deductionViewTitleImg,deductionShowAllDataImg,deductionShowAllDataImgHover,
 			deductionCalculateOptions, deductionContractualCalculateOptionImg,
+			deductionRetrievePrevValueOptionImg,
 			showEmployerShareImg, showEmployerShareImgHover,
 			hideEmployerShareImg,hideEmployerShareImgHover,
 			generateSSSImg,generateSSSImgHover,
@@ -153,6 +161,16 @@ public class Images {
 			generatePagibig,generatePagibigHover,
 			generateStPeter,generateStPeterHover,
 			generateUnionDues,generateUnionDuesHover,
+			
+			retrieveSSSLoanPrevValueImg,retrieveSSSLoanPrevValueImgHover,
+			retrievePagibigPrevValueImg,retrievePagibigPrevValueImgHover,
+			retrieveMp2PrevValueImg,retrieveMp2PrevValueImgHover,
+			retrieveMaidPrevValueImg,retrieveMaidPrevValueImgHover,
+			retrieveBemcoPrevValueImg,retrieveBemcoPrevValueImgHover,
+			retrieveLbpPrevValueImg,retrieveLbpPrevValueImgHover,
+			retrieveEmloanbPrevValueImg,retrieveEmloanPrevValueImgHover,
+			retrieveArPrevValueImg,retrieveArPrevValueImgHover,
+			retrieveWTaxPrevValueImg,retrieveWTaxPrevValueImgHover,
 					
 				
 		//--> Settings
@@ -544,6 +562,17 @@ public class Images {
 		generateSubTotalImg=newImageIcon(imageFolder+earningFolder+"GenerateSubTotal.png");
 		generateSubTotalImgHover=newImageIcon(imageFolder+earningFolder+"GenerateSubTotalHover.png");
 		
+		earningRetrievePrevValueOptionImg=newImageIcon(imageFolder+earningFolder+"RetrieveEarningsDataOptionsGroup.png");
+		
+		retrievePrevValueSalAdjImg=newImageIcon(imageFolder+earningFolder+"RetrieveSalAdjLoanPrevData.png");
+		retrievePrevValueSalAdjImgHover=newImageIcon(imageFolder+earningFolder+"RetrieveSalAdjLoanPrevDataHover.png");
+		retrievePrevValueNsDiffImg=newImageIcon(imageFolder+earningFolder+"RetrieveNsDiffPrevData.png");
+		retrievePrevValueNsDiffImgHover=newImageIcon(imageFolder+earningFolder+"RetrieveNsDiffPrevDataHover.png");
+		retrievePrevValueRATAImg=newImageIcon(imageFolder+earningFolder+"RetrieveRATAPrevData.png");
+		retrievePrevValueRATAImgHover=newImageIcon(imageFolder+earningFolder+"RetrieveRATAPrevDataHover.png");
+		retrievePrevValueLwPayImg=newImageIcon(imageFolder+earningFolder+"RetrieveLWPayPrevData.png");
+		retrievePrevValueLwPayImgHover=newImageIcon(imageFolder+earningFolder+"RetrieveLWPayPrevDataHover.png");
+		
 	}
 	
 	private void initDeductionViewPanelImages(){
@@ -577,6 +606,25 @@ public class Images {
 		generateUnionDues=newImageIcon(imageFolder+deductionFolder+"GenerateUnionDues.png");
 		generateUnionDuesHover=newImageIcon(imageFolder+deductionFolder+"GenerateUnionDuesHover.png");
 		
+		deductionRetrievePrevValueOptionImg=newImageIcon(imageFolder+deductionFolder+"RetrieveDeductionsDataOptionsGroup.png");
+		retrieveSSSLoanPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveSSSLoanPrevData.png");
+		retrieveSSSLoanPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveSSSLoanPrevDataHover.png");
+		retrievePagibigPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrievePagibigLoanPrevData.png");
+		retrievePagibigPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrievePagibigLoanPrevDataHover.png");
+		retrieveMp2PrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveMP2PrevData.png");
+		retrieveMp2PrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveMP2PrevDataHover.png");
+		retrieveMaidPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveMAidPrevData.png");
+		retrieveMaidPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveMAidPrevDataHover.png");
+		retrieveBemcoPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveBEMCOPrevData.png");
+		retrieveBemcoPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveBEMCOPrevDataHover.png");
+		retrieveLbpPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveLBPPrevData.png");
+		retrieveLbpPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveLBPPrevDataHover.png");
+		retrieveEmloanbPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveEMLOANPrevData.png");
+		retrieveEmloanPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveEMLOANPrevDataHover.png");
+		retrieveArPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveARPrevData.png");
+		retrieveArPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveARPrevDataHover.png");
+		retrieveWTaxPrevValueImg=newImageIcon(imageFolder+deductionFolder+"RetrieveWTaxPrevData.png");
+		retrieveWTaxPrevValueImgHover=newImageIcon(imageFolder+deductionFolder+"RetrieveWTaxPrevDataHover.png");
 		
 	}
 	

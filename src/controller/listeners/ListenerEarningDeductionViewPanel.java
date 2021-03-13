@@ -87,6 +87,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 			if(e.getSource()==bothEarningDeductionViewPanel.calculateBtn){
 					System.out.println(THIS_CLASS_NAME+"Calculation Button clicked!"+CLASS_NAME);
 				bothEarningDeductionViewPanel.calculationPanel.setVisible((bothEarningDeductionViewPanel.calculationPanel.isVisible())?false:true);
+				bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(false);
 			}
 			else{
 				//--> Add listener to calculation buttons.
@@ -176,6 +177,16 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 					}
 				}
 			}
+			
+			//-------------------------------------------------------------------
+			//--> SHOW RETRIEVE PREV VALUE PANEL
+			if(e.getSource()==bothEarningDeductionViewPanel.retrievePrevValueBtn){
+					System.out.println(THIS_CLASS_NAME+"Retrieve Value Button clicked!"+CLASS_NAME);
+				bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible((bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.isVisible())?false:true);
+				bothEarningDeductionViewPanel.calculationPanel.setVisible(false);
+			}
+			
+			
 			
 			//-------------------------------------------------------------------
 	

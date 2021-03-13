@@ -252,6 +252,18 @@ public class Constant {
 		//-> Calculation Contractual EARNING View Panel
 		GENERATE_RATE_PER_DAY="Generate Rate Per Day", GENERATE_SUB_TOTAL="Generate Sub-Total",
 		
+		
+		//-->Retrieve Prev Value DEDUCTION View Panel
+		RETRIEVE_PREV_VALUE_SSS_LOAN_BTN = "Retrieve Prev Value SSS Loan",RETRIEVE_PREV_VALUE_PAGIBIG_LOAN_BTN="Retrieve Prev Value PAGIBIG",
+		RETRIEVE_PREV_VALUE_MP2_BTN = "Retrieve Prev Value MP2", RETRIEVE_PREV_VALUE_MAID_BTN="Retrieve Prev Value Maid",
+		RETRIEVE_PREV_VALUE_BEMCO_BTN="Retrieve Prev Value BEMCO", RETRIEVE_PREV_VALUE_LBP_BTN="Retrieve Prev Value LBP",
+		RETRIEVE_PREV_VALUE_EMLOAN_BTN="Retrieve Prev Value EMLOAN", RETRIEVE_PREV_VALUE_AR_BTN="Retrieve Prev Value A/R",
+		RETRIEVE_PREV_VALUE_WTAX_BTN="Retrieve Prev Value WTAX",
+		
+		//-->Retrieve Prev Value EARNING View Panel
+		RETRIEVE_PREV_VALUE_SAL_ADJ_BTN="Retrieve Prev Value Sal Adj", RETRIEVE_PREV_VALUE_NS_DIFF_BTN="Retrieve Prev Value NS Diff",
+		RETRIEVE_PREV_VALUE_RATA_BTN="Retrieve Prev Value RATA", RETRIEVE_PREV_VALUE_LWPAY_BTN="Retrieve Prev Value LWay",
+		
 		//--> User Account Option Buttons
 		ACCOUNT_PREFEREBCES_BTN="Account Preferences", LOGOUT_BTN="Logout"
 		
