@@ -185,6 +185,72 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 				bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible((bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.isVisible())?false:true);
 				bothEarningDeductionViewPanel.calculationPanel.setVisible(false);
 			}
+			else{
+				//--> Add listener to calculation buttons.
+				for(String key:bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.buttonList.keySet()){
+					JButton generateButton=bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.buttonList.get(key);
+					
+					if(e.getSource()==generateButton){
+						switch(key){
+							//-->GENERATE SALARY ADJUSTMENT
+							case Constant.RETRIEVE_PREV_VALUE_SAL_ADJ_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_SAL_ADJ_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_NS_DIFF_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_NS_DIFF_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_RATA_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_RATA_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_LWPAY_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_LWPAY_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							
+							//-----------------------------------------------------------------------
+							case Constant.RETRIEVE_PREV_VALUE_SSS_LOAN_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_SSS_LOAN_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_PAGIBIG_LOAN_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_PAGIBIG_LOAN_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_MP2_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_MP2_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_MAID_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_MAID_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_BEMCO_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_BEMCO_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_LBP_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_LBP_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_EMLOAN_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_EMLOAN_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_AR_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_AR_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+							case Constant.RETRIEVE_PREV_VALUE_WTAX_BTN:{
+								processRetrievePrevValue(Constant.RETRIEVE_PREV_VAL_WTAX_VALUE,bothEarningDeductionViewPanel);
+								break;
+							}
+						}
+					}
+				}
+			}
 			
 			
 			
@@ -433,6 +499,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 		boolean isBoolean=false;
 		bothEarningDeductionViewPanel.fullScreenTableScrollPane.setVisible(isBoolean);
 		bothEarningDeductionViewPanel.calculationPanel.setVisible(isBoolean);
+		bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(isBoolean);
 		isShowDataBasedOnCombobox=false;
 		
 		
@@ -694,6 +761,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 					
 					//--> Set necessary UI components
 					bothEarningDeductionViewPanel.calculationPanel.setVisible(false);
+					bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(false);
 					
 				}
 				else{
@@ -787,6 +855,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 
 			//--> Set visible calculate panel
 			bothEarningDeductionViewPanel.calculationPanel.setVisible(false);
+			bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(false);
 			
 			//--> Reuse Code
 			processShowDataBasedFromThreeColumnCombobox();
@@ -819,6 +888,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 				
 				//--> Set necessary UI components
 				bothEarningDeductionViewPanel.calculationPanel.setVisible(false);
+				bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(false);
 				
 				//--> Update Top Left Panel
 				bothEarningDeductionViewPanel.updateTopLeftPanel((bothEarningDeductionViewPanel instanceof EarningViewPanel)?1:2);
@@ -1214,6 +1284,213 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 //		}
 //	}
 //	
+	
+	/**
+	 * Execute retrieve previouse value of automative values.
+	 * @param retrievePrevValMode
+	 */
+	private void processRetrievePrevValue(int retrievePrevValMode,EarningsAndDeductionLayout bothEarningDeductionViewPanel){
+		//--> Get an array of selected row indices/index.
+		int [] selectedTableRowIndexList=Utilities.getInstance().getSelectedIndexListBasedFromTableConvertedToModel(table);
+				
+		if(selectedTableRowIndexList!=null && selectedTableRowIndexList.length>0){
+			Database db= Database.getInstance();
+			Utilities util = Utilities.getInstance();
+			ReusableTable dynamicTable=bothEarningDeductionViewPanel.dynamicTable;
+			ReusableTable fixTable=null;
+			ReusableTable fullScreenTable=bothEarningDeductionViewPanel.fullScreenTable;
+			ReusableTable tableToBeCalculated=null;
+			
+			//-------------------------------------
+
+			int []columnIndexToBeCalculated=null; 
+			int columnIndexTotal=dynamicTable.getModel().getColumnCount()-1; // dynamic Table column index; Total Deduction.
+			int columnIndexSalary=-1; // fixed table coliumn index: Salary.
+			boolean isCalculate=true;
+			int numOfColumnsNotNeeded=7; // First Columns not needed: {Earning/Deduction ID, PayrollDate, EmployeeID, FamilyName, FirstName, Department, Monthly Fixed Salary}
+			
+			//-------------------------------------
+		
+			switch(editMode){
+				//--> When Editing only One Column.
+				case Constant.EDIT_ONCE:{
+					fixTable=fullScreenTable;
+					tableToBeCalculated=fullScreenTable;
+					//--> Fullscreen table coliumn index: Salary. Depends if the employer share data is shown or deduction data is shown.
+					columnIndexSalary=4; // Column Index Salary
+					columnIndexToBeCalculated=new int[1];
+					columnIndexToBeCalculated[0]=tableToBeCalculated.getColumnCount();  // full screen column index to be calculated
+					
+					if(util.payrollSystemMode==Constant.PAYROLL_SYSTEM_MODE_CONTRACTUAL){
+						columnIndexToBeCalculated[0]+=1;
+					}
+					
+					// Note: tableToBeCalculated.getColumnCount() and tableToBeCalculated.getModel().getColumnCount()
+					break;
+				}
+				//--> When Editing Multiple Column.
+				case Constant.EDIT_MULTIPLE:{
+					
+					
+					fixTable=bothEarningDeductionViewPanel.fixedTable;
+					tableToBeCalculated=dynamicTable;
+					columnIndexSalary=4; // fixed table coliumn index: Salary.
+					
+					//---------------------------------------------------------------------------------
+					//--> EARNING Calculation/Generation
+					if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_SAL_ADJ_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of Salary Adjustment."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.SAL_ADJ_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_NS_DIFF_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of NS DIFF ."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.NS_DIFF_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_RATA_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of RATA."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.RATA_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_LWPAY_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of LW Pay."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.LW_PAY_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					
+					
+					//-----------------------------------------------------------------------------------
+					//--> DEDUCTION Calculation/Generation
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_SSS_LOAN_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of SSS Loan."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.SSS_LOAN_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_PAGIBIG_LOAN_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of PAGIBIG Loan."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.PAGIBIG_LOAN_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_MP2_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of MP2."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.MP2_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_MAID_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of M-AID."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.MAID_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_BEMCO_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of BEMCO."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.BEMCO_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_LBP_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of LBP."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.LBP_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_EMLOAN_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of EMLOAN."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.EMLOAN_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_AR_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of AR."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.AR_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+					else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_WTAX_VALUE){
+						System.out.println(THIS_CLASS_NAME+"Retreve Previous Value of W-Tax."+CLASS_NAME);
+						
+						columnIndexToBeCalculated=new int[1];
+						for(int i=0;i<columnIndexToBeCalculated.length;i++){
+							columnIndexToBeCalculated[i]=Constant.WTAX_COLUMN_INDEX+numOfColumnsNotNeeded;
+						}
+					}
+
+
+					break;
+				}
+				default:{
+					break;
+				}
+			}
+			
+			//-------------------------------------
+			
+			//--> Checks if the clicked calculation matched chosen column to edit. If edit mode is ONCE.
+			if(editMode==Constant.EDIT_ONCE && !isChosenRetrievePrevValueMatchedTheChosenColumnToBeEdited(retrievePrevValMode)){
+				isCalculate=false;
+			}
+			//--> Checks that if what is shown in table is employershare data, only 3 calculation is allowed[SSS Cont, Pag-ibig Cont, Medicare,]. If edit mode is MULTIPLE.
+			else if(editMode==Constant.EDIT_MULTIPLE &&
+					isEmployerShareDataShown &&
+					!(retrievePrevValMode==Constant.CALCULATE_SSS_VALUE || retrievePrevValMode==Constant.CALCULATE_PAGIBIG_VALUE || retrievePrevValMode==Constant.CALCULATE_MEDICARE_VALUE)){
+				isCalculate=false;
+			}
+			
+			
+			//-------------------------------------
+			
+			if(isCalculate){
+				//--> Calculate the needed value and assign it to the field of phic in table.
+				tableToBeCalculated=retrievePrevVal(
+						bothEarningDeductionViewPanel,
+						db, retrievePrevValMode,
+						tableToBeCalculated, fixTable, columnIndexSalary,
+						columnIndexToBeCalculated, columnIndexTotal,numOfColumnsNotNeeded,
+						editMode
+				);
+			}
+			else{
+				mainFrame.showOptionPaneMessageDialog("You cannot use this method of retrieval.", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		
+		}
+		else{
+			mainFrame.showOptionPaneMessageDialog("You have not selected anything!", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	
 	/**
 	 * Process what will happen when SHOW employer share button is clicked.
@@ -2127,6 +2404,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 			bothEarningDeductionViewPanel.dynamicTableScrollPane.setVisible(isBoolean);
 			bothEarningDeductionViewPanel.fixedTableScrollPane.setVisible(isBoolean);
 			bothEarningDeductionViewPanel.calculationPanel.setVisible(isBoolean);
+			bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(isBoolean);
 			
 			//--> Update Top Left Panel
 			bothEarningDeductionViewPanel.updateTopLeftPanel((bothEarningDeductionViewPanel instanceof EarningViewPanel)?1:2);
@@ -2336,6 +2614,10 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 				+"\tSelected Combo Index: "+selectedComboboxIndex+CLASS_NAME);
 		return false;
 	}
+	
+	
+	
+	
 	private void l_________________________________________________________________l(){}
 	
 	/**
@@ -2860,6 +3142,277 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 	
 	private void l________________________________________________l(){}
 	
+	/**
+	 * 
+	 * @param db
+	 * @param calculationMode
+	 * @param table
+	 * @param fixTable
+	 * @param columnIndexSalary
+	 * @param columnIndexCalculated
+	 * @param columnIndexTotal
+	 * @param numOfColumnsNotNeeded
+	 * @param editMode
+	 * @return
+	 */
+	private ReusableTable retrievePrevVal(EarningsAndDeductionLayout bothEarningDeductionViewPanel,Database db,int calculationMode,ReusableTable table,
+			ReusableTable fixTable,int columnIndexSalary,int[] columnIndexCalculated,
+			int columnIndexTotal,int numOfColumnsNotNeeded,int editMode){
+		
+		double retrievedValue=-1;
+		//--> Get an array of selected row indices/index.
+		int [] selectedTableRowIndexList=Utilities.getInstance().getSelectedIndexListBasedFromTableConvertedToModel(table);
+		
+		String 
+			previousPayrollDate=Utilities.getInstance().convertDateReadableToYyyyMmDdDate(
+				bothEarningDeductionViewPanel.payrollDateComboBox.getItemAt(
+					bothEarningDeductionViewPanel.payrollDateComboBox.getSelectedIndex()+1 // Plus 1 to get the previouse value
+				)
+			),
+			columnName="",
+			dbName="";
+		
+		for(int i=0,notNeededCountColumnIndex=3,row=-1;i<selectedTableRowIndexList.length;i++){
+			//--> Get the row
+			row=selectedTableRowIndexList[i];
+			
+			
+			//--> Assign in column to be edited the value.
+			//--> Get the column
+			for(int colIndex:columnIndexCalculated){
+				
+				//--> Check if what calculation to use
+				//--------------------------------------------------------
+				//--> EARNING View Retrieve Value
+				if(calculationMode==Constant.RETRIEVE_PREV_VAL_SAL_ADJ_VALUE){
+					dbName=db.tableNameEarnings;
+					columnName=db.earningTableColumnNames[notNeededCountColumnIndex+Constant.SAL_ADJ_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_NS_DIFF_VALUE){
+					dbName=db.tableNameEarnings;
+					columnName=db.earningTableColumnNames[notNeededCountColumnIndex+Constant.NS_DIFF_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_RATA_VALUE){
+					dbName=db.tableNameEarnings;
+					columnName=db.earningTableColumnNames[notNeededCountColumnIndex+Constant.RATA_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_LWPAY_VALUE){
+					dbName=db.tableNameEarnings;
+					columnName=db.earningTableColumnNames[notNeededCountColumnIndex+Constant.LW_PAY_COLUMN_INDEX];				
+				}
+				
+				
+				//--------------------------------------------------------
+				//--> DEDUCTION View Retrieve Value
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_SSS_LOAN_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.SSS_LOAN_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_PAGIBIG_LOAN_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.PAGIBIG_LOAN_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_MP2_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.MP2_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_MAID_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.MAID_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_BEMCO_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.BEMCO_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_LBP_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.LBP_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_EMLOAN_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.EMLOAN_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_AR_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.AR_COLUMN_INDEX];				
+				}
+				else if(calculationMode==Constant.RETRIEVE_PREV_VAL_WTAX_VALUE){
+					dbName=db.tableNameDeductions;
+					columnName=db.deductionTableColumnNames[notNeededCountColumnIndex+Constant.WTAX_COLUMN_INDEX];				
+				}
+				
+				//--> BEGIN RETRIEVAL
+				retrievedValue=doRetrievalOfPreviousValue(db, 
+						columnName, dbName, 
+						previousPayrollDate, 
+						(String) table.getModel().getValueAt(row, 2) // EmployeeID
+				);
+				
+				
+				
+				//--> Debugging Purposes
+				System.out.println("\t\tRetieved/Generated Value: "+retrievedValue+CLASS_NAME);
+				table.getModel().data[row][colIndex]=retrievedValue;
+				
+				//--> This assignent process only happens when the employer share data is shown and edit mode is EDIT ONCE since there are two columns to be edited and calculated.
+				if(isEmployerShareDataShown && editMode==Constant.EDIT_ONCE){
+					table.getModel().data[row][colIndex-1]=tempCalculatedValue;
+				}
+			}
+			
+			//--> Assign the total table with the total value after calculating.. Remember: this total process is not incuded when data shown is employer share data.
+			if(editMode == Constant.EDIT_MULTIPLE && !isEmployerShareDataShown){
+				bothEarningDeductionViewPanel.dynamicTable.getModel().data[row][columnIndexTotal]=
+						table.getModel().getCalculatedTotalDynamicTableOnly(row,bothEarningDeductionViewPanel,Utilities.getInstance());
+			}
+		}
+		
+		
+		//--> Update the state/appearance of table only, not in the database.
+//		table.updateTableStateNotContent();
+		
+		
+		
+		return table;
+	}
+	
+	/**
+	 * Checks if the chosen retrieve prev value button matched the chosen single column to be edit.
+	 * @param buttonKey
+	 * @return
+	 */
+	private boolean isChosenRetrievePrevValueMatchedTheChosenColumnToBeEdited(int retrievePrevValMode){
+		int selectedComboboxIndex=bothEarningDeductionViewPanel.columnComboBox.getSelectedIndex();
+		
+		// Why +1? because in the combobox there is one extra which is the empty/ALL string .
+
+		
+		//--> EARNING
+		if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_SAL_ADJ_VALUE && selectedComboboxIndex==Constant.SAL_ADJ_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of Salary Adjustment."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_NS_DIFF_VALUE && selectedComboboxIndex==Constant.NS_DIFF_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of NS Diff."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_RATA_VALUE && selectedComboboxIndex==Constant.RATA_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of RATA."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_LWPAY_VALUE && selectedComboboxIndex==Constant.LW_PAY_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of LW Pay."+CLASS_NAME);
+			return true;
+		}
+		
+		
+		
+		//-------------------------------------------------------------------------------------
+		//--> DEDUCTION 
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_SSS_LOAN_VALUE && selectedComboboxIndex==Constant.SSS_LOAN_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of SSS Loan."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_PAGIBIG_LOAN_VALUE && selectedComboboxIndex==Constant.PAGIBIG_LOAN_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of PAGIBIG Loan."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_MP2_VALUE && selectedComboboxIndex==Constant.MP2_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of MP2."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_MAID_VALUE && selectedComboboxIndex==Constant.MAID_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of M-Aid."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_BEMCO_VALUE && selectedComboboxIndex==Constant.BEMCO_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of BEMCO."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_LBP_VALUE && selectedComboboxIndex==Constant.LBP_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of LBP."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_EMLOAN_VALUE && selectedComboboxIndex==Constant.EMLOAN_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of EMLOAN."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_AR_VALUE && selectedComboboxIndex==Constant.AR_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of AR."+CLASS_NAME);
+			return true;
+		}
+		else if(retrievePrevValMode==Constant.RETRIEVE_PREV_VAL_WTAX_VALUE && selectedComboboxIndex==Constant.WTAX_COLUMN_INDEX+1){
+			System.out.println(THIS_CLASS_NAME+"Retrieve Prev Value of W-Tax."+CLASS_NAME);
+			return true;
+		}
+		
+		
+		
+		
+		System.out.println(THIS_CLASS_NAME+"Calculate FAILED!."
+				+"\tSelected Combo Index: "+selectedComboboxIndex+CLASS_NAME);
+		return false;
+	}
+	
+	private double doRetrievalOfPreviousValue(Database db ,
+			String columnName, String dbName, 
+			String previousPayrollDate,String employeeID){
+		
+		//--------------------------------------------------------------------------------		
+		double calculateValue=0;
+		System.out.println("\t Chosen employee ID: "+employeeID+CLASS_NAME);
+		System.out.println("\t Database Name: "+dbName+CLASS_NAME);
+		System.out.println("\t ColumnName: "+columnName+CLASS_NAME);
+		
+		
+		//--------------------------------------------------------------------------------
+		//--> Process consitionValueList
+		String employeeIdColumnName=db.employeeTableColumnNames[0], // EmployeeID
+				payrollDateColumnName=db.payrollDateTableColumnNames[0]; //PayrollDate
+		
+		ArrayList<SelectConditionInfo>conditionColumnAndValueList=new ArrayList<SelectConditionInfo>();
+		conditionColumnAndValueList.add(new SelectConditionInfo(employeeIdColumnName, employeeID)); 
+		conditionColumnAndValueList.add(new SelectConditionInfo(payrollDateColumnName,previousPayrollDate)); 
+		
+		
+		//--------------------------------------------------------------------------------
+		//--> Get data from database.
+		db.selectDataInDatabase(
+				new String[]{dbName},
+				new String[]{columnName},
+				conditionColumnAndValueList,
+				null,
+				null,
+				Constant.SELECT_BASED_FROM_COLUMN_WITH_CONDITION_AND
+		);
+		
+		//--------------------------------------------------------------------------------
+		//--> Get the value from resultset.
+		
+		int columnIndex=1; // Since the resultset return only 1 column values.  
+		try {
+			db.resultSet.last();
+			int totalRows=db.resultSet.getRow();
+			if(totalRows>0){
+				db.resultSet.first();
+				calculateValue=(double) db.resultSet.getObject(columnIndex);			
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//--------------------------------------------------------------------------------
+		
+		return calculateValue;
+
+			
+	}
+	
+	private void l_________________________________________________l(){}
+	
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -3073,6 +3626,7 @@ public class ListenerEarningDeductionViewPanel implements ActionListener,Documen
 //		//--> Set enabled necessary UI components
 		boolean isBoolean=false;
 		bothEarningDeductionViewPanel.calculationPanel.setVisible(isBoolean);
+		bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.setVisible(isBoolean);
 		
 		isBoolean=true;
 		bothEarningDeductionViewPanel.dynamicTableScrollPane.setVisible(isBoolean);

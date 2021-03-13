@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
 import javax.swing.JButton;
 import javax.swing.KeyStroke;
 
@@ -328,11 +329,17 @@ public class Controller implements WindowListener{
 			bothEarningDeductionViewPanel.saveBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.cancelBtn.addActionListener(earningDeductionViewPanelListener);
 			bothEarningDeductionViewPanel.backBtn.addActionListener(earningDeductionViewPanelListener);
-			
+	
 			//--> Add listener to calculate buttons.
 			for(String key:bothEarningDeductionViewPanel.calculationPanel.buttonList.keySet()){
 				JButton calculationPanel=bothEarningDeductionViewPanel.calculationPanel.buttonList.get(key);
-				calculationPanel.addActionListener(earningDeductionViewPanelListener);
+				calculationPanel.addActionListener(earningDeductionViewPanelListener);	
+			}
+			
+			//--> Add listener to retrieve prev val buttons.
+			for(String key:bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.buttonList.keySet()){
+				JButton btn=bothEarningDeductionViewPanel.retrievePrevValOptionalPanel.buttonList.get(key);
+				btn.addActionListener(earningDeductionViewPanelListener);
 			}
 			
 			bothEarningDeductionViewPanel.showBtn.addActionListener(earningDeductionViewPanelListener);
@@ -596,11 +603,16 @@ public class Controller implements WindowListener{
 	 */
 	public void addListenersThatAreNeededAfterSelectingPayrollSystemMode(){
 		
-		
 		//--> EarningViewPanel: add listener to calculate buttons.
 		for(String key:EarningViewPanel.getInstance().calculationPanel.buttonList.keySet()){
 			JButton calculationPanel=EarningViewPanel.getInstance().calculationPanel.buttonList.get(key);
 			calculationPanel.addActionListener(earningDeductionViewPanelListener);
+		}
+		
+		//--> EarningViewPanel: Add listener to retrieve prev val buttons.
+		for(String key:EarningViewPanel.getInstance().retrievePrevValOptionalPanel.buttonList.keySet()){
+			JButton btn=EarningViewPanel.getInstance().retrievePrevValOptionalPanel.buttonList.get(key);
+			btn.addActionListener(earningDeductionViewPanelListener);
 		}
 		
 		//--> DeductionViewPanel: add listener to calculate buttons.
@@ -608,6 +620,13 @@ public class Controller implements WindowListener{
 			JButton calculationPanel=DeductionViewPanel.getInstance().calculationPanel.buttonList.get(key);
 			calculationPanel.addActionListener(earningDeductionViewPanelListener);
 		}
+		
+		//-->DeductionViewPanel: Add listener to retrieve prev val buttons.
+		for(String key:DeductionViewPanel.getInstance().retrievePrevValOptionalPanel.buttonList.keySet()){
+			JButton btn=DeductionViewPanel.getInstance().retrievePrevValOptionalPanel.buttonList.get(key);
+			btn.addActionListener(earningDeductionViewPanelListener);
+		}
+		
 		
 		
 		//--> PayrollViewPanel: add listener to calculate buttons..
