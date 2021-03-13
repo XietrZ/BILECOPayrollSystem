@@ -181,16 +181,16 @@ public class Constant {
 			SSS_CONT_COLUMN_INDEX=2, //<--> SSSEr
 			PAGIBIG_COLUMN_INDEX=3, // <--> Pag-ibigEr
 			MEDICARE_COLUMN_INDEX=4, // <--> MedicareEr
-			UNION_DUES_COLUMN_INDEX=7,
+			UNION_DUES_COLUMN_INDEX=8,
 	
 	
-			ASEMCO_COLUMN_INDEX=12,
-			BCCI_COLUMN_INDEC=13,
-			OCCCI_COLUMN_INDEX=14,
-			DBP_COLUMN_INDEX=15,
-			CFI_COLUMN_INDEX=16,
+			ASEMCO_COLUMN_INDEX=13,
+			BCCI_COLUMN_INDEC=14,
+			OCCCI_COLUMN_INDEX=15,
+			DBP_COLUMN_INDEX=16,
+			CFI_COLUMN_INDEX=17,
 			
-			ST_PETER_COLUMN_INDEX=17;
+			ST_PETER_COLUMN_INDEX=18;
 	
 	private void l______________________________________________________________________________l(){}
 	//-------------------------------BUTTON CONSTANT STRINGS----------------------------------------------------------------------
