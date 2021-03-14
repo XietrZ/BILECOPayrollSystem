@@ -203,9 +203,15 @@ private final String CLASS_NAME="\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+thi
 			util.payrollSystemMode=Constant.PAYROLL_SYSTEM_MODE_REGULAR;
 			
 			earningViewPanel.setCalculationPanelRegular();
+			earningViewPanel.setRetrievePrevVaueOptionalViewPanelRegular();
+			
+			
 			deductionViewPanel.setCalculationPanelRegular();
+			deductionViewPanel.setRetrievePrevVaueOptionalViewPanelRegular();
+			
 			payrollViewPanel.setPDFPanelComponentsRegular();
 			payrollViewPanel.setExcelPanelComponentsRegular();
+			
 			settingsViewPanel.setRegularOptionPanelComponents();
 			
 		}

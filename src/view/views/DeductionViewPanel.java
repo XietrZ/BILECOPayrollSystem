@@ -58,7 +58,7 @@ public class DeductionViewPanel extends EarningsAndDeductionLayout {
 	 * Set Calculation Panel on Contractual
 	 */
 	public void setCalculationPanelContractual(){
-		setNecessaryOptionPanelComponentsWhenExtended(174, 26, img.deductionViewTitleImg,
+		setNecessaryLabelComponentsWhenExtended(174, 26, img.deductionViewTitleImg,
 				img.deductionShowAllDataImg,img.deductionShowAllDataImgHover);
 		
 		
@@ -77,9 +77,9 @@ public class DeductionViewPanel extends EarningsAndDeductionLayout {
 				img.generatePagibigHover,
 				img.generatePhilhealthImgHover
 		};
-		setNecessaryCalculatePanelComponentsWhenExtended(
+		calculationPanel =  setNecessaryOptionViewPanelComponentsWhenExtended(
 				img.deductionContractualCalculateOptionImg, 252, 85,
-				buttonKeyList, imageList, imageHoverList);
+				buttonKeyList, imageList, imageHoverList, calculationPanel);
 		
 		//--> Match the triangle in calculation button
 		calculationPanel.setLocation(8,44);
@@ -92,7 +92,7 @@ public class DeductionViewPanel extends EarningsAndDeductionLayout {
 	 * Set the calculation panel when the mode is regular
 	 */
 	public void setCalculationPanelRegular(){
-		setNecessaryOptionPanelComponentsWhenExtended(174, 26, img.deductionViewTitleImg,
+		setNecessaryLabelComponentsWhenExtended(174, 26, img.deductionViewTitleImg,
 				img.deductionShowAllDataImg,img.deductionShowAllDataImgHover);
 		
 		
@@ -120,12 +120,65 @@ public class DeductionViewPanel extends EarningsAndDeductionLayout {
 				img.generateAsemcoHover,
 				img.generateStPeterHover
 		};
-		setNecessaryCalculatePanelComponentsWhenExtended(
+		calculationPanel = setNecessaryOptionViewPanelComponentsWhenExtended(
 				img.deductionCalculateOptions, 252, 112,
-				buttonKeyList, imageList, imageHoverList);
+				buttonKeyList, imageList, imageHoverList, calculationPanel);
 		
 		//--> Match the triangle in calculation button
 		calculationPanel.setLocation(8,44);
+		
+		this.repaint();
+		this.revalidate();
+	}
+	
+	
+	/**
+	 * Set the retrieve prev value panel when the mode is regular
+	 */
+	public void setRetrievePrevVaueOptionalViewPanelRegular(){
+//		setNecessaryLabelComponentsWhenExtended(174, 26, img.deductionViewTitleImg,
+//				img.deductionShowAllDataImg,img.deductionShowAllDataImgHover);
+		
+		
+		String[] buttonKeyList={
+				Constant.RETRIEVE_PREV_VALUE_SSS_LOAN_BTN,
+				Constant.RETRIEVE_PREV_VALUE_PAGIBIG_LOAN_BTN,
+				Constant.RETRIEVE_PREV_VALUE_MP2_BTN,
+				Constant.RETRIEVE_PREV_VALUE_MAID_BTN,
+				Constant.RETRIEVE_PREV_VALUE_BEMCO_BTN,
+				Constant.RETRIEVE_PREV_VALUE_LBP_BTN,
+				Constant.RETRIEVE_PREV_VALUE_EMLOAN_BTN,
+				Constant.RETRIEVE_PREV_VALUE_AR_BTN,
+				Constant.RETRIEVE_PREV_VALUE_WTAX_BTN
+		};
+		ImageIcon[] imageList={
+				img.retrieveSSSLoanPrevValueImg,
+				img.retrievePagibigPrevValueImg,
+				img.retrieveMp2PrevValueImg,
+				img.retrieveMaidPrevValueImg,
+				img.retrieveBemcoPrevValueImg,
+				img.retrieveLbpPrevValueImg,
+				img.retrieveEmloanbPrevValueImg,
+				img.retrieveArPrevValueImg,
+				img.retrieveWTaxPrevValueImg
+		};
+		ImageIcon[] imageHoverList={
+				img.retrieveSSSLoanPrevValueImgHover,
+				img.retrievePagibigPrevValueImgHover,
+				img.retrieveMp2PrevValueImgHover,
+				img.retrieveMaidPrevValueImgHover,
+				img.retrieveBemcoPrevValueImgHover,
+				img.retrieveLbpPrevValueImgHover,
+				img.retrieveEmloanPrevValueImgHover,
+				img.retrieveArPrevValueImgHover,
+				img.retrieveWTaxPrevValueImgHover
+		};
+		retrievePrevValOptionalPanel = setNecessaryOptionViewPanelComponentsWhenExtended(
+				img.deductionRetrievePrevValueOptionImg, 208, 161,
+				buttonKeyList, imageList, imageHoverList, retrievePrevValOptionalPanel);
+		
+		//--> Match the triangle in calculation button
+		retrievePrevValOptionalPanel.setLocation(40,44);
 		
 		this.repaint();
 		this.revalidate();
