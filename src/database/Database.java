@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 
 
 
+
 import com.mysql.cj.jdbc.Blob;
 
 import model.Constant;
@@ -82,8 +83,10 @@ public class Database {
 	private String portNumber="3306";		//default
 	private String databaseName="bileco_db"
 			+ "";	//default --> bileco_db and bileco_db_test
-	private String userName="root";// XietrZ_PC: "root"/"XietrZ" ||  Carls_PC: "root"/"Bileco" || MaamKath_PC: "root"/"BILECO"
-	private String password="45174517xietrz";// XietrZ_PC: "1234" ||  Carls_PC: "Term1nat0r" || MaamKath_PC: "Term1nat0r"
+//	private String userName="root";// XietrZ_PC: "root"/"XietrZ" ||  Carls_PC: "root"/"Bileco" || MaamKath_PC: "root"/"BILECO"
+//	private String password="45174517xietrz";// XietrZ_PC: "1234" ||  Carls_PC: "Term1nat0r" || MaamKath_PC: "Term1nat0r"
+	private String userName="BILECO";// XietrZ_PC: "root"/"XietrZ" ||  MaamKath_PC: "root"/"BILECO" ||  Carls_PC: "root"/"Bileco" 
+	private String password="Term1nat0r";// XietrZ_PC: "45174517xietrz" ||  MaamKath_PC: "Term1nat0r" || Carls_PC: "Term1nat0r" 
 	
 	
 	
