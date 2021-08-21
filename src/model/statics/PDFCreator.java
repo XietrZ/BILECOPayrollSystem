@@ -124,7 +124,7 @@ public class PDFCreator {
 					mode==Constant.PAYROLL_BCCI_PDF   ||
 					mode==Constant.PAYROLL_OCCCI_PDF  ||
 					mode==Constant.PAYROLL_DBP_PDF 	  ||
-					mode==Constant.PAYROLL_CFI_PDF	  ||
+					mode==Constant.PAYROLL_CITY_SAVINGS_PDF	  ||
 					mode==Constant.PAYROLL_ST_PETER_PLAN_PDF||
 					mode==Constant.PAYROLL_W_TAX_PDF||		
 					mode==Constant.PAYROLL_LBP_PDF	  ||		
@@ -182,7 +182,7 @@ public class PDFCreator {
 					mode==Constant.PAYROLL_BCCI_PDF 	|| 
 					mode==Constant.PAYROLL_OCCCI_PDF 	||
 					mode==Constant.PAYROLL_DBP_PDF 		||
-					mode==Constant.PAYROLL_CFI_PDF		||
+					mode==Constant.PAYROLL_CITY_SAVINGS_PDF		||
 					mode==Constant.PAYROLL_ST_PETER_PLAN_PDF ||
 					mode==Constant.PAYROLL_W_TAX_PDF){
 				 
@@ -211,8 +211,8 @@ public class PDFCreator {
 				 		neededColumnName=db.deductionTableColumnNames[initTableIndex+3];
 				 		break;
 				 	}
-				 	case Constant.PAYROLL_CFI_PDF:{
-				 		title="CFI";
+				 	case Constant.PAYROLL_CITY_SAVINGS_PDF:{
+				 		title="CITY SAVINGS";
 				 		neededColumnName=db.deductionTableColumnNames[initTableIndex+4];
 				 		break;
 				 	}

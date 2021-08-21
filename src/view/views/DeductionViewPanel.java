@@ -121,11 +121,11 @@ public class DeductionViewPanel extends EarningsAndDeductionLayout {
 				img.generateStPeterHover
 		};
 		calculationPanel = setNecessaryOptionViewPanelComponentsWhenExtended(
-				img.deductionCalculateOptions, 252, 112,
+				img.deductionCalculateOptions, 314, 112,
 				buttonKeyList, imageList, imageHoverList, calculationPanel);
 		
 		//--> Match the triangle in calculation button
-		calculationPanel.setLocation(8,44);
+		calculationPanel.setLocation(0,44);
 		
 		this.repaint();
 		this.revalidate();

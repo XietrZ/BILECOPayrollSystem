@@ -2833,9 +2833,9 @@ public class Database {
 		String query=
 				"SELECT FamilyName,FirstName,"
 				+"RegPay,SalAdj,Overtime,`NS-DIFF`,ECOLA,TotalEarnings,"	// Earning Column																			
-				+"SSSLoan,`Pag-ibigLoan`,SSSCont, `Pag-ibigCont`,Medicare,`M-Aid`,MP2,BEMCO,`Un-Dues`,LBP,TotalDeductions," // Deduction Column
+				+"SSSLoan,`Pag-ibigLoan`,SSSCont, `Pag-ibigCont`,Medicare, MP2,`M-Aid`,BEMCO,`Un-Dues`,LBP,TotalDeductions," // Deduction Column
 				+"RATA,`L-A`,Longevity,Rice,`L-W/OPay`,"		 // Earning Column																			
-				+"EMLOAN, `A/R`,`W-Tax`,ASEMCO,BCCI,OCCCI,DBP,CFI,`St.Peter`" // Deduction Column
+				+"EMLOAN, `A/R`,`W-Tax`,ASEMCO,BCCI,OCCCI,DBP,CitySavings,`St.Peter`" // Deduction Column
 				+" FROM ("
 				+" SELECT earnings.EmployeeID,earnings.PayrollDate FROM earnings" 
 				+" UNION "

@@ -188,7 +188,7 @@ public class PDFCreatorTestCase {
 	
 	
 	@Test
-	public void testPayroll_CFI_PDF() {
+	public void testPayroll_CITY_SAVINGS_PDF() {
 		init();
 		
 		PayrollViewPanel payrollViewPanel = PayrollViewPanel.getInstance();
@@ -203,7 +203,7 @@ public class PDFCreatorTestCase {
 		
 		String fileNamePath=Constant.FILE_PATH_NAME_PDF;
 		PDFCreator.getInstance().createPdf(fileNamePath, null,
-				null,Constant.PAYROLL_CFI_PDF);
+				null,Constant.PAYROLL_CITY_SAVINGS_PDF);
 		
 		assertEquals(true,true );
 	}
