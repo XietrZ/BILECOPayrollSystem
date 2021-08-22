@@ -109,7 +109,7 @@ private void l____________________________l(){}
 		optionPanel=new OptionViewPanel(
 				buttonKeyList, null, 
 				imageList, imageHoverList, 
-				163, 44, 194, 249
+				158, 44, 194, 249
 		);
 		
 		add(optionPanel);
@@ -179,7 +179,7 @@ private void l____________________________l(){}
 		topPanel.add(settingsOptionButton);
 		
 		//--> Add the TITLE option button/label
-		int optionSettingTitleBtnWIDTH=316,optionSettingTitleBtnHEIGHT=36;
+		int optionSettingTitleBtnWIDTH=425,optionSettingTitleBtnHEIGHT=36;
 		optionSettingTitleLabel=new JLabel();
 		optionSettingTitleLabel.setHorizontalAlignment(JLabel.CENTER);
 		optionSettingTitleLabel.setVerticalAlignment(JLabel.CENTER);
@@ -462,7 +462,7 @@ private void l____________________________l(){}
 		
 		
 		setNecessaryOptionPanelComponentsWhenExtended( 
-			img.settingsOptionPanelBgImg, 194, 249,
+			img.settingsOptionPanelBgImg, 258, 249,
 			buttonKeyList, imageList, imageHoverList
 		);
 	}

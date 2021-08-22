@@ -304,7 +304,7 @@ public class ExcelCreator {
 				mode==Constant.PAYROLL_BCCI_EXCEL 			|| 
 				mode==Constant.PAYROLL_OCCCI_EXCEL 			||
 				mode==Constant.PAYROLL_DBP_EXCEL 			||
-				mode==Constant.PAYROLL_CFI_EXCEL			||
+				mode==Constant.PAYROLL_CITYSAVINGS_EXCEL			||
 				mode==Constant.PAYROLL_ST_PETER_PLAN_EXCEL 	||
 				mode==Constant.PAYROLL_W_TAX_EXCEL){
 			
@@ -333,8 +333,8 @@ public class ExcelCreator {
 			 		neededColumnName=db.deductionTableColumnNames[dbIndex+3];
 			 		break;
 			 	}
-			 	case Constant.PAYROLL_CFI_EXCEL:{
-			 		title="CFI";
+			 	case Constant.PAYROLL_CITYSAVINGS_EXCEL:{
+			 		title="CITY SAVINGS";
 			 		neededColumnName=db.deductionTableColumnNames[dbIndex+4];
 			 		break;
 			 	}

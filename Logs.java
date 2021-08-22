@@ -19,7 +19,7 @@
 		BCCI																					Database.java
 		OCCCI																					Database.java
 		DBP																					Database.java
-		CFI																					Database.java
+		CitySavings																					Database.java
 		St.Peter																					Database.java
 		TotalDeductions																					Database.java
 		Comments																					Database.java

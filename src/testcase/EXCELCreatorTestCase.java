@@ -185,7 +185,7 @@ public class EXCELCreatorTestCase {
 	
 	
 	@Test
-	public void testPayroll_CFI_EXCEL() {
+	public void testPayroll_CITY_SAVINGS_EXCEL() {
 		init();
 		
 		PayrollViewPanel payrollViewPanel = PayrollViewPanel.getInstance();
@@ -199,7 +199,7 @@ public class EXCELCreatorTestCase {
 		System.out.println();
 		
 		MainFrame mainFrame = MainFrame.getInstance();
-		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_CFI_EXCEL,mainFrame);
+		ExcelCreator.getInstance().viewExcel(Constant.PAYROLL_CITYSAVINGS_EXCEL,mainFrame);
 		
 		
 		assertEquals(true,true );

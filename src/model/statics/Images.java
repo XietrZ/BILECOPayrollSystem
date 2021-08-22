@@ -85,7 +85,7 @@ public class Images {
 			displayBCCIPayrollDataPDFImg, displayBCCIPayrollDataPDFImgHover,
 			displayOCCCIPayrollDataPDFImg, displayOCCCIPayrollDataPDFImgHover,
 			displayDBPPayrollDataPDFImg, displayDBPPayrollDataPDFImgHover,
-			displayCFIPayrollDataPDFImg,displayCFIPayrollDataPDFImgHover,
+			displayCitySavingsPayrollDataPDFImg,displayCitySavingsPayrollDataPDFImgHover,
 			displaySSSLoanPayrollDataPDFImg,displaySSSLoanPayrollDataPDFImgHover,
 			displayPagibigLoanPayrollDataPDFImg, displayPagibigLoanPayrollDataPDFImgHover,
 			displayStPlanPayrollDataPDFImg, displayStPlanPayrollDataPDFImgHover,
@@ -108,7 +108,7 @@ public class Images {
 			exportBCCIPayrollDataExcelImg, exportBCCIPayrollDataExcelImgHover,
 			exportOCCCIPayrollDataExcelImg, exportOCCCIPayrollDataExcelImgHover,
 			exportDBPPayrollDataExcelImg, exportDBPPayrollDataExcelImgHover,
-			exportCFIPayrollDataExcelImg,exportCFIPayrollDataExcelImgHover,
+			exportCitySavingsPayrollDataExcelImg,exportCitySavingsPayrollDataExcelImgHover,
 			exportSSSLoanPayrollDataExcelImg,exportSSSLoanPayrollDataExcelImgHover,
 			exportPagibigLoanPayrollDataExcelImg, exportPagibigLoanPayrollDataExcelImgHover,
 			exportStPlanPayrollDataExcelImg, exportStPlanPayrollDataExcelImgHover,
@@ -416,8 +416,8 @@ public class Images {
 		displayOCCCIPayrollDataPDFImgHover=newImageIcon(imageFolder+payrollFolder+"DisplayOccciPayrollDataPDFHover.png");
 		displayDBPPayrollDataPDFImg=newImageIcon(imageFolder+payrollFolder+"DisplayDbpPayrollDataPDF.png");
 		displayDBPPayrollDataPDFImgHover=newImageIcon(imageFolder+payrollFolder+"DisplayDbpPayrollDataPDFHover.png");
-		displayCFIPayrollDataPDFImg=newImageIcon(imageFolder+payrollFolder+"DisplayCfiPayrollDataPDF.png");
-		displayCFIPayrollDataPDFImgHover=newImageIcon(imageFolder+payrollFolder+"DisplayCfiPayrollDataPDFHover.png");
+		displayCitySavingsPayrollDataPDFImg=newImageIcon(imageFolder+payrollFolder+"DisplayCitySavingsPayrollDataPDF.png");
+		displayCitySavingsPayrollDataPDFImgHover=newImageIcon(imageFolder+payrollFolder+"DisplayCitySavingsPayrollDataPDFHover.png");
 		displaySSSLoanPayrollDataPDFImg=newImageIcon(imageFolder+payrollFolder+"DisplaySSSLoanPayrollDataPDF.png");
 		displaySSSLoanPayrollDataPDFImgHover=newImageIcon(imageFolder+payrollFolder+"DisplaySSSLoanPayrollDataPDFHover.png");
 		displayPagibigLoanPayrollDataPDFImg=newImageIcon(imageFolder+payrollFolder+"DisplayPagibigLoanPayrollDataPDF.png");
@@ -454,8 +454,8 @@ public class Images {
 		exportASEMCOPayrollDataExcelImgHover=newImageIcon(imageFolder+payrollFolder+"ExportAsemcoPayrollDataEXCELHover.png");
 		exportBCCIPayrollDataExcelImg=newImageIcon(imageFolder+payrollFolder+"ExportBcciPayrollDataEXCEL.png");
 		exportBCCIPayrollDataExcelImgHover=newImageIcon(imageFolder+payrollFolder+"ExportBcciPayrollDataEXCELHover.png");
-		exportCFIPayrollDataExcelImg=newImageIcon(imageFolder+payrollFolder+"ExportCfiPayrollDataEXCEL.png");
-		exportCFIPayrollDataExcelImgHover=newImageIcon(imageFolder+payrollFolder+"ExportCfiPayrollDataEXCELHover.png");
+		exportCitySavingsPayrollDataExcelImg=newImageIcon(imageFolder+payrollFolder+"ExportCitySavingsPayrollDataEXCEL.png");
+		exportCitySavingsPayrollDataExcelImgHover=newImageIcon(imageFolder+payrollFolder+"ExportCitySavingsPayrollDataEXCELHover.png");
 		exportDBPPayrollDataExcelImg=newImageIcon(imageFolder+payrollFolder+"ExportDbpPayrollDataEXCEL.png");
 		exportDBPPayrollDataExcelImgHover=newImageIcon(imageFolder+payrollFolder+"ExportDbpPayrollDataEXCELHover.png");
 		exportDepartmentPayrollDataExcelImg=newImageIcon(imageFolder+payrollFolder+"ExportDepartmentPayrollDataEXCEL.png");

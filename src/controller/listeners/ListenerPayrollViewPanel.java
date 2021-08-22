@@ -398,10 +398,10 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 						processDisplayPayrollDataDialogPDFExcel(Constant.PAYROLL_DBP_PDF);
 						break;
 					}
-					case Constant.DISPLAY_CFI_DATA_PDF:{
-						System.out.println(THIS_CLASS_NAME+"Display CFI payroll data."+CLASS_NAME);
+					case Constant.DISPLAY_CITY_SAVINGS_DATA_PDF:{
+						System.out.println(THIS_CLASS_NAME+"Display City Savings payroll data."+CLASS_NAME);
 						
-						processDisplayPayrollDataDialogPDFExcel(Constant.PAYROLL_CFI_PDF);
+						processDisplayPayrollDataDialogPDFExcel(Constant.PAYROLL_CITY_SAVINGS_PDF);
 						break;
 					}
 					case Constant.DISPLAY_ST_PLAN_PDF:{
@@ -506,10 +506,10 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 						
 						break;
 					}
-					case Constant.EXPORT_CFI_DATA_EXCEL:{
-						System.out.println(THIS_CLASS_NAME+"Export CFI Data."+CLASS_NAME);
+					case Constant.EXPORT_CITY_SAVINGS_DATA_EXCEL:{
+						System.out.println(THIS_CLASS_NAME+"Export City Savings Data."+CLASS_NAME);
 	
-						processDisplayPayrollDataDialogPDFExcel(Constant.PAYROLL_CFI_EXCEL);
+						processDisplayPayrollDataDialogPDFExcel(Constant.PAYROLL_CITYSAVINGS_EXCEL);
 						
 						break;
 					}
@@ -1415,10 +1415,10 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 				payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL.setTitle("Display DBP Payroll PDF Option");
 				break;
 			}
-			case Constant.DISPLAY_CFI_DATA_PDF:{
+			case Constant.DISPLAY_CITY_SAVINGS_DATA_PDF:{
 				dialog.showButton.setIcon(Images.getInstance().showPDFPayrollImg);
 				dialog.showButton.setRolloverIcon(Images.getInstance().showPDFPayrollImgHover);
-				payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL.setTitle("Display CFI Payroll PDF Option");
+				payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL.setTitle("Display City Savings Payroll PDF Option");
 				break;
 			}
 			case Constant.DISPLAY_ST_PLAN_PDF:{
@@ -1509,10 +1509,10 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 				
 				break;
 			}
-			case Constant.EXPORT_CFI_DATA_EXCEL:{
+			case Constant.EXPORT_CITY_SAVINGS_DATA_EXCEL:{
 				dialog.showButton.setIcon(Images.getInstance().showExcelPayrollImg);
 				dialog.showButton.setRolloverIcon(Images.getInstance().showExcelPayrollImgHover);
-				payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL.setTitle("Export CFI Data");
+				payrollViewPanel.dispDialogWithPayrolDateComboboxOnlyOptionPDFEXCEL.setTitle("Export City Savings Data");
 				
 				break;
 			}
@@ -2875,8 +2875,8 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 						break;
 					}
 					//--> DISPLAY CFI PAYROLL DATA is clicked. Show the dialog first
-					case Constant.DISPLAY_CFI_DATA_PDF:{
-						payrollDispPDFEXCELBtnClicked=Constant.DISPLAY_CFI_DATA_PDF;
+					case Constant.DISPLAY_CITY_SAVINGS_DATA_PDF:{
+						payrollDispPDFEXCELBtnClicked=Constant.DISPLAY_CITY_SAVINGS_DATA_PDF;
 						
 						processShowDisplayWithPayrollDateComboboxPDFEXCELOptionDialog();
 						break;
@@ -3013,8 +3013,8 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 						break;
 					}
 					//--> EXPORT CFI PAYROLL DATA is clicked. Show the dialog first
-					case Constant.EXPORT_CFI_DATA_EXCEL:{
-						payrollDispPDFEXCELBtnClicked=Constant.EXPORT_CFI_DATA_EXCEL;
+					case Constant.EXPORT_CITY_SAVINGS_DATA_EXCEL:{
+						payrollDispPDFEXCELBtnClicked=Constant.EXPORT_CITY_SAVINGS_DATA_EXCEL;
 						
 						processShowDisplayWithPayrollDateComboboxPDFEXCELOptionDialog();
 						break;
@@ -3145,7 +3145,7 @@ public class ListenerPayrollViewPanel implements ActionListener,ListSelectionLis
 				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_BCCI_DATA_EXCEL) ||
 				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_OCCCI_DATA_EXCEL) ||
 				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_DBP_DATA_EXCEL) ||
-				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_CFI_DATA_EXCEL) ||
+				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_CITY_SAVINGS_DATA_EXCEL) ||
 				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_SSS_LOAN_DATA_EXCEL) ||
 				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_PAGIBIG_LOAN_EXCEL) ||
 				payrollDispPDFEXCELBtnClicked.equals(Constant.EXPORT_ST_PLAN_EXCEL) ||
